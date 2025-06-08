@@ -5,6 +5,7 @@
   --foreground: #171717;
   --grey-dark: #1E1E1E;
   --navy: #121F33;
+  --navy-medium: #333D4D;
   --red-medium: #F54242;
   --blue-medium: #4287F5;
   --green-medium: #48F542;
@@ -107,17 +108,24 @@ button{
   width: 100%;
 }
 
+.listed-asteroid-details{
+  display: grid;
+  grid-template-columns: auto;
+  gap: 10px;
+}
+
 .listed-asteroid-details-separator{
   background-color: var(--white);
   height: 2px;
   border: none;
   border-radius: 20px;
-  margin: 20px 0 20px 0;
+  /*margin: 20px 0 20px 0;*/
 }
 
 .listed-asteroid-details-section{
   display: grid; 
   grid-template-columns: max-content auto;
+  row-gap: 20px;
   align-items: start;
   justify-content: start;
   gap: 50px;
@@ -144,7 +152,7 @@ button{
 }
 
 #form-search-submit{
-  background-color: var(--blue-medium);
+  background-color: var(--navy-medium);
   color: var(--white);
   border: none;
   border-radius: 10px;
