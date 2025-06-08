@@ -9,7 +9,7 @@ import Asteroid from "@/app/components/asteroids/ListedAsteroid";
 export default function Browse() {
 
     const [searchInput, setSearchInput]: [string, Dispatch<SetStateAction<string>>] = useState<string>("");
-    const [asteroids, setAsteroids]: [AsteroidType[] | null, Dispatch<SetStateAction<AsteroidType[] | null>>] = useState<AsteroidType[] | null>(null);
+    const [asteroids, setAsteroids]: [AsteroidExtendedType[] | null, Dispatch<SetStateAction<AsteroidExtendedType[] | null>>] = useState<AsteroidExtendedType[] | null>(null);
 
     const getAsteroids = async (): Promise<void> => {
         try {
@@ -18,7 +18,7 @@ export default function Browse() {
                 "method": "GET"
             });
             if (apiRes.status === 200) {
-                const asteroids: AsteroidType[] = await apiRes.json();
+                const asteroids: AsteroidExtendedType[] = await apiRes.json();
                 setAsteroids(asteroids);
             }
         } catch (error: unknown) {
@@ -121,18 +121,12 @@ export default function Browse() {
                         {asteroids ? (
                             <>
                                 {/* List asteroids */}
-                                {asteroids.map((asteroid: AsteroidType, index: number) => {
-                                    return (
-                                        <p key={`asteroid-${asteroid._id}`}>
-                                            {asteroid.name}</p>
-                                    );
-                                })}
-                                {/*asteroids.map((asteroid: AsteroidExtendedType, index: number) => {
+                                {asteroids.map((asteroid: AsteroidExtendedType, index: number) => {
                                     return (
                                         <Asteroid key={`asteroid-${asteroid._id}`}
                                             asteroid={asteroid} />
                                     );
-                                })*/}
+                                })}
                             </>
                         ) : ("")}
 

@@ -19,7 +19,7 @@ export type AsteroidType = {
     last_observation_date: string;
     semi_major_axis: number;
     inclination: number;
-    orbit_class_type: number;
+    orbit_class_type: string;
 }
 
 export type AsteroidExtendedType = {
