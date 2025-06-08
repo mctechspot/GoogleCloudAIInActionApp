@@ -3,6 +3,10 @@
         "title": "Browse Asteroid Collection",
         "description": [
             "Here you can browse through our asteroid collection to garner insights and generate detailed astronomical reports."
-        ]
+        ],
+        "search": {
+            "placeholder": "Search for asteroid by name or number. e.g. 433 or Eros",
+            "button": "Search"
+        }
     }
 }

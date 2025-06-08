@@ -84,3 +84,31 @@ body{
   border-radius: 20px;
   padding: 20px;
 }
+
+#form-search{
+  
+}
+
+#form-search-content{
+  display: grid;
+  grid-template-columns: auto max-content;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+
+#form-search-input{
+  border: solid 1px var(--white);
+  border-radius: 10px;
+  padding: 10px;
+  outline: none;
+}
+
+#form-search-submit{
+  background-color: var(--blue-medium);
+  color: var(--white);
+  border: none;
+  border-radius: 10px;
+  padding: 10px 20px;
+  cursor: pointer;
+}
