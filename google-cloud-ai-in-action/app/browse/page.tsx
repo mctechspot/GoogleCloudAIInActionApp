@@ -65,7 +65,7 @@ export default function Browse() {
     return (
         <>
             <Header />
-            <div className={"bg-navy text-white min-100vh"}>
+            <div className={"bg-gradient text-white min-100vh"}>
                 <div className={"main-padding"}>
                     <p className={"heading-1 text-center"}>{BrowseConfig.en.title}</p>
                     <br />
