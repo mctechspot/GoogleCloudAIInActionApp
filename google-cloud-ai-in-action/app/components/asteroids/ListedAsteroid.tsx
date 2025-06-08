@@ -4,6 +4,7 @@ import { AsteroidExtendedWrapperType } from "@/app/types/asteroid";
 import ChevronDown from "@/app/components/icons/ChevronDown";
 import ChevronUp from "@/app/components/icons/ChevronUp";
 import AsteroidConfig from "@/app/config/asteroid.json";
+import { prettifyDate } from "@/app/utils/formatter";
 
 export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType) {
     const [showDetails, setShowDetails]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
@@ -15,7 +16,7 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
 
                     {/* Name and Toggle Button Section */}
                     <div className={"listed-asteroid-name-section"}>
-                        <span>{asteroid.name}</span>
+                        <span className={"font-weight-900"}>{asteroid.name}</span>
 
                         {/* Toggle Details Button */}
                         <button className={"listed-asteroid-button"}
@@ -110,7 +111,7 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
                                         {AsteroidConfig.en.details.orbit_determination_date}
                                     </div>
                                     <div className={"listed-asteroid-value"}>
-                                        {asteroid.orbit_determination_date}
+                                        {prettifyDate(asteroid.orbit_determination_date, true)}
                                     </div>
                                 </div>
 
@@ -120,7 +121,7 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
                                         {AsteroidConfig.en.details.first_observation_date}
                                     </div>
                                     <div className={"listed-asteroid-value"}>
-                                        {asteroid.first_observation_date}
+                                        {prettifyDate(asteroid.first_observation_date, false)}
                                     </div>
                                 </div>
 
@@ -130,7 +131,7 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
                                         {AsteroidConfig.en.details.last_observation_date}
                                     </div>
                                     <div className={"listed-asteroid-value"}>
-                                        {asteroid.last_observation_date}
+                                        {prettifyDate(asteroid.last_observation_date, false)}
                                     </div>
                                 </div>
 
