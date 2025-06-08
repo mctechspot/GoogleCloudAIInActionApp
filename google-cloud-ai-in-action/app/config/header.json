@@ -1,0 +1,19 @@
+{
+    "en": {
+        "app_name": "Asteroid Collection",
+        "nav": {
+            "info": {
+                "title": "Info",
+                "link": "/info"
+            },
+            "browse": {
+                "title": "Browse",
+                "link": "/about"
+            },
+            "about": {
+                "title": "About",
+                "link": "/about"
+            }
+        }
+    }
+}
