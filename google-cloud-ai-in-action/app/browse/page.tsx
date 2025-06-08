@@ -1,4 +1,5 @@
 "use client"
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import BrowseConfig from "@/app/config/browse.json";
 import Header from "@/app/components/navigation/Header";
 import { FormEvent } from "react";
@@ -6,6 +7,10 @@ import { AsteroidExtendedType } from "@/app/types/asteroid";
 import Asteroid from "@/app/components/asteroids/ListedAsteroid";
 
 export default function Browse() {
+
+    const [searchInput, setSearchInput]: [string, Dispatch<SetStateAction<string>>] = useState<string>("");
+
+
     const asteroids: AsteroidExtendedType[] = [{
         _id: "2001580",
         name: "1580 Betulia (1950 KA)",
@@ -62,12 +67,16 @@ export default function Browse() {
         }
     }
 
+    useEffect(() => {
+        console.log(searchInput);
+    }, [searchInput]);
+
     return (
         <>
             <Header />
             <div className={"bg-gradient text-white min-100vh"}>
                 <div className={"main-padding"}>
-                    <p className={"heading-1 text-center"}>{BrowseConfig.en.title}</p>
+                    <p className={"heading-1 text-uppercase text-center"}>{BrowseConfig.en.title}</p>
                     <br />
                     <div className={"grid-vertical-gap-10px"}>
                         {BrowseConfig.en.description.map((paragraph: string, index: number) => {
@@ -82,7 +91,8 @@ export default function Browse() {
                         {/* Search Form */}
                         <form id={"form-search"} method={"POST"} onSubmit={(event) => handlesearch(event)}>
                             <div id={"form-search-content"}>
-                                <input id={"form-search-input"} className={"input-text"} type={"text"} placeholder={BrowseConfig.en.search.placeholder} />
+                                <input id={"form-search-input"} className={"input-text"} type={"text"} placeholder={BrowseConfig.en.search.placeholder}
+                                onChange={(event) => setSearchInput(event.target.value ? event.target.value.trim(): "")} />
                                 <button id={"form-search-submit"} type={"submit"}>{BrowseConfig.en.search.button}</button>
                             </div>
                         </form>

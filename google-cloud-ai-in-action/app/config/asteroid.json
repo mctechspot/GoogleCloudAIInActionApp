@@ -13,7 +13,14 @@
             "last_observation_date": "Last Observation Date",
             "semi_major_axis": "Last Observation Date",
             "inclination": "Inclination",
-            "orbit_class_type": "Orbit Class Type"
+            "orbit_class_type": {
+                "title": "Orbit Class Type",
+                "details": {
+                    "abbreviation": "Abbreviation",
+                    "name": "Name",
+                    "description": "Description"
+                }
+            }
         }
     }
 }

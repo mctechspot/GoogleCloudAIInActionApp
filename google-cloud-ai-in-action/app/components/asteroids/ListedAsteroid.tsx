@@ -16,7 +16,7 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
 
                     {/* Name and Toggle Button Section */}
                     <div className={"listed-asteroid-name-section"}>
-                        <span className={"font-weight-900"}>{asteroid.name}</span>
+                        <span className={"text-uppercase font-weight-900"}>{asteroid.name}</span>
 
                         {/* Toggle Details Button */}
                         <button className={"listed-asteroid-button"}
@@ -156,12 +156,30 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
                                 </div>
 
                                 {/* Orbit Class Type */}
-                                <div className={"listed-asteroid-details-section"}>
+                                <div className={"listed-asteroid-orbit-class-container grid-vertical-gap-10px"}>
                                     <div className={"listed-asteroid-title font-weight-900"}>
-                                        {AsteroidConfig.en.details.orbit_class_type}
+                                        {AsteroidConfig.en.details.orbit_class_type.title}
                                     </div>
-                                    <div className={"listed-asteroid-value"}>
-                                        {asteroid.orbit_class_type.name}
+                                    <div className={"listed-asteroid-orbit-class-type"}>
+
+                                        {/* Orbit Class Type Abbreviation */}
+                                        <div className={"listed-asteroid-orbit-class-type-section"}>
+                                            <span className={"font-weight-900"}>{AsteroidConfig.en.details.orbit_class_type.details.abbreviation}</span>
+                                            <span>{asteroid.orbit_class_type.abbreviation}</span>
+                                        </div>
+
+                                        {/* Orbit Class Type Name */}
+                                        <div className={"listed-asteroid-orbit-class-type-section"}>
+                                            <span className={"font-weight-900"}>{AsteroidConfig.en.details.orbit_class_type.details.name}</span>
+                                            <span>{asteroid.orbit_class_type.name}</span>
+                                        </div>
+
+                                        {/* Orbit Class Type Description */}
+                                        <div className={"listed-asteroid-orbit-class-type-section"}>
+                                            <span className={"font-weight-900"}>{AsteroidConfig.en.details.orbit_class_type.details.description}</span>
+                                            <span>{asteroid.orbit_class_type.description}</span>
+                                        </div>
+
                                     </div>
                                 </div>
 
