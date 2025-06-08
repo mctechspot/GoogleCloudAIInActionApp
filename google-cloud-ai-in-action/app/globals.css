@@ -24,6 +24,11 @@ body{
   font-size: 1rem;
 }
 
+button{
+  border: none;
+  cursor: pointer;
+}
+
 .min-100vh{
   min-height: 100vh;
 }
@@ -50,6 +55,10 @@ body{
 
 .text-white{
   color: var(--white);
+}
+
+.font-weight-900{
+  font-weight: 900;
 }
 
 .heading-1{
@@ -79,10 +88,40 @@ body{
   gap: 10px;
 }
 
-.asteroid-button{
+.listed-asteroid-container{
   border: solid 1px var(--white);
   border-radius: 20px;
   padding: 20px;
+}
+
+.listed-asteroid-button{
+
+}
+
+.listed-asteroid-name-section{
+  display: grid;
+  grid-template-columns: auto max-content;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  width: 100%;
+}
+
+.listed-asteroid-details-separator{
+  background-color: var(--white);
+  height: 2px;
+  border: none;
+  border-radius: 20px;
+  margin: 20px 0 20px 0;
+}
+
+.listed-asteroid-details-section{
+  display: grid; 
+  grid-template-columns: max-content auto;
+  align-items: start;
+  justify-content: start;
+  gap: 50px;
+  width: 100%;
 }
 
 #form-search{

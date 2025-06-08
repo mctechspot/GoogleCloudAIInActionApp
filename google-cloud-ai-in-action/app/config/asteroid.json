@@ -1,0 +1,19 @@
+{
+    "en": {
+        "details": {
+            "_id": "ID",
+            "name": "Name",
+            "absolute_magnitude_h": "Absolute Magnitude",
+            "estimated_diameter_min": "Estimated Minimum Diameter",
+            "estimated_diameter_max": "Estimated Maximum Diameter",
+            "is_potentially_hazardous": "Potentially Hazardous?",
+            "orbit_id": "Orbit ID",
+            "orbit_determination_date": "Orbit Determination Date",
+            "first_observation_date": "First Observation Date",
+            "last_observation_date": "Last Observation Date",
+            "semi_major_axis": "Last Observation Date",
+            "inclination": "Inclination",
+            "orbit_class_type": "Orbit Class Type"
+        }
+    }
+}
