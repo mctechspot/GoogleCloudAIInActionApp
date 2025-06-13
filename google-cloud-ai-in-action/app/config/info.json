@@ -1,11 +1,12 @@
 {
     "en": {
-        "title": "Asteroid Information",
+        "title": "Asteroids",
         "description": [
+            "Asteroids! Aren't those what killed the dinosaurs?",
             "Asteroids are some of the most fascinating bodies in the universe. They are rocky substances that orbit the sun and vary in size from small to large.",
             "The distance of an asteroid is typically measured in astronimcal units (AU) from the sun.",
-            "Most known asteroids form the Main Asteroid belt between Mars and Jupyter. There is also the Kuiper belt which falls beyond Neptune's orbit and is located 50 astronomical units (AU) from the sun.",
-            "Upon discovering an asteroid with a confirmed orbit, the asteroid is first given a number and then a name, e.g. (433) Eros, although the parentheses are often informally omitted to be just 433 Eros"
+            "Most known asteroids form the Main Asteroid belt between Mars and Jupyter. There is also the Kuiper belt which falls beyond Neptune's orbit and is located 50 AU from the sun.",
+            "Upon discovering an asteroid with a confirmed orbit, the asteroid is given a number and then a name, e.g. (433) Eros, although the parentheses are often informally omitted to be just 433 Eros."
         ]
     }
 }

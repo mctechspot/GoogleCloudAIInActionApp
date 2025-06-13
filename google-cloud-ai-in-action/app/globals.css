@@ -30,6 +30,18 @@ button {
   cursor: pointer;
 }
 
+.main-layout{
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  height: 100%;
+  min-height: 100vh;
+}
+
+.block-center {
+  display: block;
+  margin: auto;
+}
+
 .min-100vh {
   min-height: 100vh;
 }
@@ -94,12 +106,29 @@ button {
 
 .header-content {
   padding: 20px 150px;
+  display: grid;
+  grid-template-columns: max-content auto;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+}
+
+.header-content-nav {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+  gap: 20px;
 }
 
 .header-logo-container {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.footer-content {
+  padding: 20px 150px;
 }
 
 .listed-asteroid-container {
@@ -148,7 +177,7 @@ button {
   grid-template-columns: auto;
   gap: 10px;
   width: 100%;
-    margin-left: 20px;
+  margin-left: 20px;
 }
 
 .listed-asteroid-orbit-class-type-section {
@@ -179,11 +208,29 @@ button {
 }
 
 #form-search-submit {
-  background-color: var(--navy);
+  background-color: var(--navy-medium);
   color: var(--white);
   font-weight: 900;
   border: none;
   border-radius: 10px;
   padding: 20px;
   cursor: pointer;
+}
+
+.info-image-container {
+  background-color: var(--navy);
+  position: relative;
+  height: 400px;
+  width: calc(100vw - (150px * 2));
+  border: none;
+  border-radius: 10px;
+}
+
+.info-image {
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  width: 100%;
+  border: none;
+  border-radius: 10px;
 }

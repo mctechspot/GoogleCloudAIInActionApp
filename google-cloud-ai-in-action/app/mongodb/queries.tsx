@@ -37,7 +37,7 @@ export const getAsteroids = async (): Promise<AsteroidExtendedType[]> => {
         const db: Db = client.db('asteroids');
         const collection: Collection<AsteroidType> = db.collection('asteroids');
         const asteroidsTemp: AsteroidType[] = await collection.find({}).toArray();
-        const asteroids: AsteroidExtendedType[] = asteroidsTemp.map((asteroid: AsteroidType, index: number) => {
+        const asteroids: AsteroidExtendedType[] = asteroidsTemp.map((asteroid: AsteroidType) => {
             return {
                 ...asteroid,
                 orbit_class_type: orbitClassTypes.filter((orbitClassType: OrbitClassType) => orbitClassType._id === asteroid.orbit_class_type)[0]
