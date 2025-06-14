@@ -5,9 +5,19 @@ import ChevronDown from "@/app/components/icons/ChevronDown";
 import ChevronUp from "@/app/components/icons/ChevronUp";
 import AsteroidConfig from "@/app/config/asteroid.json";
 import { prettifyDate } from "@/app/utils/formatter";
+import PDFIcon from "@/app/components/icons/PDFIcon";
 
 export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType) {
     const [showDetails, setShowDetails]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
+    
+    const generatePDFReport = async(): Promise<void> => {
+        const apiUri: string = "/api/generate-asteroid-pdf";
+        const pdfResponse: Response = await fetch(apiUri, {
+            method: "GET"
+        });
+        console.log(pdfResponse);
+    }
+    
     return (
         <>
             <div className={"listed-asteroid-container"}>
@@ -16,6 +26,7 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
 
                     {/* Name and Toggle Button Section */}
                     <div className={"listed-asteroid-name-section"}>
+
                         <span className={"text-uppercase font-weight-900"}>{asteroid.name}</span>
 
                         {/* Toggle Details Button */}
@@ -40,13 +51,25 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
 
                     {showDetails ? (
                         <>
+
                             {/* Details */}
                             <div className={"listed-asteroid-details"}>
 
                                 <div className={"listed-asteroid-details-separator"}></div>
 
-                                {/* Name */}
                                 <div className={"listed-asteroid-details-section"}>
+
+                                    {/* Generate PDF button */}
+                                    <button type={"button"} className={"button-asteroid-pdf-generator"}
+                                        onClick={() => console.log("GENERATE PDF REPORT")}>
+                                        <PDFIcon
+                                            height={30}
+                                            width={30}
+                                            colour={"#121F33"}
+                                        />
+                                    </button>
+
+                                    {/* Name */}
                                     <div className={"listed-asteroid-title font-weight-900"}>
                                         {AsteroidConfig.en.details.name}
                                     </div>

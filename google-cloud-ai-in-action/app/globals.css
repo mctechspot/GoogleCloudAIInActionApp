@@ -150,6 +150,7 @@ button {
   border: solid 1px var(--navy);
   border-radius: 20px;
   padding: 20px;
+  position: relative;
 }
 
 .listed-asteroid-button {}
@@ -397,4 +398,13 @@ button {
   100% {
     clip-path: polygon(50% 50%, 0 0, 100% 0, 100% 100%, 0 100%, 0 0)
   }
+}
+
+.button-asteroid-pdf-generator{
+  background-color: var(--offwhite);
+  border: none;
+  border-radius: 20px;
+  position: absolute;
+  right: 0;
+  padding: 10px;
 }

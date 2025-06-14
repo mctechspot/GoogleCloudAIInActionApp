@@ -3,6 +3,7 @@ import fs from 'fs'
 import { AsteroidExtendedType } from '@/app/types/asteroid';
 import { prettifyDate } from "@/app/utils/formatter";
 import ReportConfig from "@/app/config/report.json";
+import { v4 as uuidv4 } from 'uuid';
 
 // Generate a PDF report for asteroid 
 export const generatePDF = (asteroid: AsteroidExtendedType, reportContent: string): void => {
@@ -22,7 +23,9 @@ export const generatePDF = (asteroid: AsteroidExtendedType, reportContent: strin
     doc.font(robotoSerifRegular);
 
     // Saving the pdf file in root directory.
-    doc.pipe(fs.createWriteStream('example.pdf'));
+    const id: string = uuidv4();
+    const fileName: string = `${asteroid.name.replace(" ", "_")}`
+    doc.pipe(fs.createWriteStream(`/tmp/asteroid_${fileName}_report_${id}.pdf`));
 
     // Set page background
     // Add brand name to cover page
