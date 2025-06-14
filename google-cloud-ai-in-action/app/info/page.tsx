@@ -2,7 +2,7 @@ import Image from "next/image";
 import InfoConfig from "@/app/config/info.json";
 import Header from "@/app/components/navigation/Header";
 import Footer from "@/app/components/navigation/Footer";
-import AsteroidImage from "@/public/asteroids.jpeg";
+import AsteroidImage from "@/public/asteroids.png";
 
 export default function Info() {
 

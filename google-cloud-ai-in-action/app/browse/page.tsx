@@ -122,7 +122,11 @@ export default function Browse() {
 
                                     <>
                                         {/* Loader Here */}
-                                        <div className={"asteroids-loader-container"}>
+                                        <div className={"loader-container"}>
+                                            <div className={"loader"}></div>
+                                        </div>
+                                        
+                                        {/*<div className={"asteroids-loader-container"}>
                                             <Image
                                                 className={"asteroids-loader"}
                                                 src={AsteroidsLoader}
@@ -130,7 +134,7 @@ export default function Browse() {
                                                 height={100}
                                                 width={100}
                                             />
-                                        </div>
+                                        </div>*/}
                                     </>
 
                                 )}

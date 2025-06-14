@@ -3,7 +3,6 @@ export type OrbitClassType = {
     abbreviation: string;
     name: string;
     description: string;
-    colour: string;
 }
 
 export type AsteroidType = {

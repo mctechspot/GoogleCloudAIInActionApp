@@ -53,16 +53,16 @@ export const generatePDF = (asteroid: AsteroidExtendedType, reportContent: strin
         })
 
     // Image
-    const imagePath = 'asteroids.png';
+    const imagePath = 'asteroid.png';
     const pageWidth = doc.page.width;
-    const imageWidth = pageWidth * 0.66;
-    const imageHeight = imageWidth / 1.77777777778;
+    const imageWidth = pageWidth * 0.30;
+    const imageHeight = imageWidth;
     const centerX = (pageWidth - imageWidth) / 2;
     const fixedY = doc.y;
 
     doc.image(imagePath, centerX, fixedY, {
         width: imageWidth,
-        height: imageHeight
+        height: imageWidth
     })
     .moveDown();
 

@@ -11,7 +11,7 @@ export default function Footer() {
 
             <footer id={"footer"} className={"bg-navy text-white"}>
                 <div className={"footer-content"}>
-                    <p className={"footer-year text-center"}>&copy; {yearText} {FooterConfig.en.app_name}</p>
+                    <p className={"footer-year text-center"}>&copy; {yearText} {FooterConfig.en.brand_name}</p>
                 </div>
             </footer>
         </>

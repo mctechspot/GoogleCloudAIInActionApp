@@ -1,6 +1,17 @@
 {
     "en": {
-        "app_name": "Asteroid Search",
-        "description": "Explore the known asteroids in our universe"
+        "brand_name": "Asteroid Collection",
+        "tag_line": "Educating the public about the asteroids in our universe",
+        "explore": "Explore",
+        "nav": {
+            "info": {
+                "title": "Info",
+                "link": "/info"
+            },
+            "browse": {
+                "title": "Browse",
+                "link": "/browse"
+            }
+        }
     }
 }
