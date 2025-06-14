@@ -1,5 +1,7 @@
 import { NextResponse } from "next/server";
 import { GoogleGenAI } from '@google/genai';
+import { generatePDF } from "@/app/utils/pdf-generator";
+import { AsteroidExtendedType } from "@/app/types/asteroid"; 
 
 export const GET = async (): Promise<NextResponse> => {
     const modelName: string = process.env.GEMINI_MODEL ? process.env.GEMINI_MODEL : "gemini-2.0-flash";
@@ -10,12 +12,15 @@ export const GET = async (): Promise<NextResponse> => {
         let report = "";
         const response = await ai.models.generateContent({
             model: modelName,
-            contents: `Generate a strictly-text based report about the scientific facts about this asteroid. Include not just data provided but supplementary scientific, astronomic and fun facts about it. Asteroid: ${asteroid}`,
+            contents: `Generate a strictly-text based report about the scientific facts about this asteroid. Include not just data provided but supplementary scientific, astronomic and fun facts about it. Text should be essay-styled with rich data and explanation of concepts, at least 5 paragraphs. Follow standard format of introduction to the concept of asteroids, then introduction of the specific asteroid being discussed, then detailed paragraphs about the asteroid and a fascinating conclusion. Make the tone academic but intriguing. Do not cut off content. The essay should be complete. No ** or ## common in formatting systems. Style should be prose like in an essay. Asteroid: ${asteroid}`,
         });
 
         if (response && response.text) {
             report = response.text;
+            generatePDF(report);
         }
+
+        // TEMP generate report
 
         return NextResponse.json({ report: report }, { status: 200 });
 
@@ -27,9 +32,9 @@ export const GET = async (): Promise<NextResponse> => {
         let statusCode: number = 500;
         let message: string = "Error generating asteroid report.";
         if (error instanceof Error) {
-            console.log(`Error generating asteroid report: ${error.message}`);
             statusCode = error.message.includes(`"error":{"code":503`) ? 503 : statusCode;
-            message = error.message.includes(`"error":{"code":503`) ? `Error generating asteroid report. Model ${modelName} is overloaded. Please try again later.` : message;
+            message = error.message.includes(`"error":{"code":503`) ? `Error generating asteroid report. Model ${modelName} is overloaded. Please try again later.` : `Error generating asteroid report: ${error.message}`;
+            console.log(`Error generating asteroid report: ${error.message}`);
         }
         return NextResponse.json({ "error": message }, { status: statusCode });
     }

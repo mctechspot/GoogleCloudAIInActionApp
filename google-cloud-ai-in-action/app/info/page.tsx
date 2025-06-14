@@ -12,8 +12,8 @@ export default function Info() {
                 <Header />
 
                 {/* Main Content */}
-                <div className={"main-content bg-navy"}>
-                    <div className={"text-white"}>
+                <div className={"main-content bg-offwhite"}>
+                    <div className={""}>
                         <div className={"main-padding grid-vertical-gap-20px"}>
                             <p className={"heading-1 text-uppercase text-center"}>{InfoConfig.en.title}</p>
                             <div className={"info-image-container block-center"}>

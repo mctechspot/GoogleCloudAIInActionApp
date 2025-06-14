@@ -48,16 +48,16 @@ export default function Browse() {
     useEffect(() => {
         console.log(searchInput);
     }, [searchInput]);
-
+    
     return (
         <>
             <div className={"main-layout"}>
-                
+
                 <Header />
 
                 {/* Main Content */}
-                <div className={"main-content bg-navy"}>
-                    <div className={"text-white"}>
+                <div className={"main-content bg-offwhite"}>
+                    <div className={""}>
                         <div className={"main-padding grid-vertical-gap-20px"}>
                             <p className={"heading-1 text-uppercase text-center"}>{BrowseConfig.en.title}</p>
                             <br />

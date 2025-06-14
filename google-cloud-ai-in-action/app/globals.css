@@ -11,6 +11,7 @@
   --green-medium: #48F542;
   --yellow-medium: #EFF542;
   --white: #FFFFFF;
+  --offwhite: #E6E9EF;
   --black: #000000;
 }
 
@@ -21,7 +22,7 @@
 }
 
 body {
-  font-family: "Roboto Mono", monospace;
+  font-family: "Roboto Serif", serif;
   font-size: 1rem;
 }
 
@@ -65,6 +66,10 @@ button {
 
 .bg-grey-dark {
   background-color: var(--grey-dark);
+}
+
+.bg-offwhite{
+    background-color: var(--offwhite);
 }
 
 .text-center {
@@ -132,7 +137,7 @@ button {
 }
 
 .listed-asteroid-container {
-  border: solid 1px var(--white);
+  border: solid 1px var(--navy);
   border-radius: 20px;
   padding: 20px;
 }
@@ -155,11 +160,10 @@ button {
 }
 
 .listed-asteroid-details-separator {
-  background-color: var(--white);
+  background-color: var(--navy);
   height: 2px;
   border: none;
   border-radius: 20px;
-  /*margin: 20px 0 20px 0;*/
 }
 
 .listed-asteroid-details-section {
@@ -201,14 +205,18 @@ button {
 }
 
 #form-search-input {
-  border: solid 1px var(--white);
+  border: solid 1px var(--navy);
   border-radius: 10px;
   padding: 20px;
   outline: none;
 }
 
+#form-search-input::placeholder {
+  color: var(--navy-medium);
+}
+
 #form-search-submit {
-  background-color: var(--navy-medium);
+  background-color: var(--navy);
   color: var(--white);
   font-weight: 900;
   border: none;

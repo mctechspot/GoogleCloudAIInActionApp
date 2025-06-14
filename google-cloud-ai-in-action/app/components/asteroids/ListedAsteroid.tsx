@@ -25,13 +25,13 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
                                 <ChevronUp
                                     height={20}
                                     width={20}
-                                    colour={"#FFFFFF"}
+                                    colour={"#121F33"}
                                 />
                             ) : (
                                 <ChevronDown
                                     height={20}
                                     width={20}
-                                    colour={"#FFFFFF"}
+                                    colour={"#121F33"}
                                 />
                             )}
 
