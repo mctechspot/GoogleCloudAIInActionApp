@@ -9,15 +9,34 @@ import PDFIcon from "@/app/components/icons/PDFIcon";
 
 export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType) {
     const [showDetails, setShowDetails]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
-    
-    const generatePDFReport = async(): Promise<void> => {
-        const apiUri: string = "/api/generate-asteroid-pdf";
+
+    const generatePDFReport = async (): Promise<void> => {
+        const apiUri: string = "/api/generate-asteroid-report";
         const pdfResponse: Response = await fetch(apiUri, {
-            method: "GET"
+            method: "POST",
+            body: JSON.stringify(asteroid),
+            headers: {
+                "Content-type": "application/json"
+            },
         });
-        console.log(pdfResponse);
+        if (pdfResponse.status === 200) {
+            console.log(`Report generated for asteroid ${asteroid.name}`);
+
+            // Download returned link
+            const blob = await pdfResponse.blob();
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement("a");
+            link.href = url;
+            link.download = `asteroid_${asteroid.name.replace(" ", "_")}_report.pdf`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        } else {
+            console.log(`Error generating report: ${pdfResponse.status}: ${pdfResponse.statusText}: ${pdfResponse.text}`);
+        }
     }
-    
+
     return (
         <>
             <div className={"listed-asteroid-container"}>
@@ -61,7 +80,7 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
 
                                     {/* Generate PDF button */}
                                     <button type={"button"} className={"button-asteroid-pdf-generator"}
-                                        onClick={() => console.log("GENERATE PDF REPORT")}>
+                                        onClick={() => generatePDFReport()}>
                                         <PDFIcon
                                             height={30}
                                             width={30}
