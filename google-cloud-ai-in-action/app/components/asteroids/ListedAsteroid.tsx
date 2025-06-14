@@ -1,6 +1,6 @@
 "use client"
 import { Dispatch, SetStateAction, useState } from "react";
-import { AsteroidExtendedWrapperType } from "@/app/types/asteroid";
+import { AsteroidExtendedWrapperType } from "@/types/asteroid";
 import ChevronDown from "@/app/components/icons/ChevronDown";
 import ChevronUp from "@/app/components/icons/ChevronUp";
 import AsteroidConfig from "@/app/config/asteroid.json";

@@ -1,14 +1,12 @@
 "use client"
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import Image from "next/image";
 import BrowseConfig from "@/app/config/browse.json";
 import Header from "@/app/components/navigation/Header";
 import Footer from "@/app/components/navigation/Footer";
 import { FormEvent } from "react";
-import { AsteroidExtendedType } from "@/app/types/asteroid";
+import { AsteroidExtendedType } from "@/types/asteroid";
 import Asteroid from "@/app/components/asteroids/ListedAsteroid";
-import AsteroidsLoader from "@/public/asteroids-loader.gif";
-import { PaginationType, PaginationWrapperType } from "@/app/types/pagination";
+import { PaginationType } from "@/types/pagination";
 import Pagination from "@/app/components/asteroids/Pagination";
 
 export default function Browse() {
@@ -75,7 +73,7 @@ export default function Browse() {
                 <div className={"main-content bg-offwhite"}>
                     <div className={""}>
                         <div className={"main-padding grid-vertical-gap-20px"}>
-                            <p className={"heading-1 text-uppercase text-center"}>{BrowseConfig.en.title}</p>
+                            <p className={"heading-1 font-weight-900 text-center"}>{BrowseConfig.en.title}</p>
                             <div className={"grid-vertical-gap-20px"}>
                                 {BrowseConfig.en.description.map((paragraph: string, index: number) => {
                                     return (

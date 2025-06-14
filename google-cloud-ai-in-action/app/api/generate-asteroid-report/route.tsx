@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenAI } from '@google/genai';
 import { generatePDF } from "@/app/utils/pdf-generator";
-import { AsteroidExtendedType } from "@/app/types/asteroid";
+import { AsteroidExtendedType } from "@/types/asteroid";
 import fs from "fs/promises";
 import path from "path";
 
@@ -23,11 +23,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
 
             if (response && response.text) {
                 report = response.text;
-                console.log(report);
-
                 const filePath: string = await generatePDF(asteroid, report);
-                const destinationPath = filePath.replace("/tmp/", "");
-
                 const fileBuffer = await fs.readFile(filePath);
                 const fileName = path.basename(filePath);
 

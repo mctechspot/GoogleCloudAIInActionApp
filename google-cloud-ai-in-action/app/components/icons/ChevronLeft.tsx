@@ -1,4 +1,4 @@
-import { IconType } from "@/app/types/icon";
+import { IconType } from "@/types/icon";
 
 export default function ChevronLeft({ height, width, colour }: IconType) {
     return (

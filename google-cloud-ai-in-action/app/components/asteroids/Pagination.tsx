@@ -1,6 +1,6 @@
 "use client"
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { PaginationType, PaginationWrapperType } from "@/app/types/pagination";
+import { Dispatch, SetStateAction, useState } from "react";
+import { PaginationWrapperType } from "@/types/pagination";
 import ChevronDoubleLeft from "@/app/components/icons/ChevronDoubleLeft";
 import ChevronLeft from "@/app/components/icons/ChevronLeft";
 import ChevronDoubleRight from "@/app/components/icons/ChevronDoubleRight";
@@ -35,8 +35,8 @@ export default function Pagination({ pagination, setPagination }: PaginationWrap
         return entryCount % entryCountPerPage == 0 ? entryCount / entryCountPerPage : Math.floor(entryCount / entryCountPerPage) + 1;
     }
 
-    const [pageCount, setPageCount]: [number, Dispatch<SetStateAction<number>>] = useState<number>(getPageCount(pagination.entryCount, pagination.entryCountPerPage));
-    const [numPaginationButtons, setNumPaginationButtons]: [number, Dispatch<SetStateAction<number>>] = useState<number>(5);
+    const [pageCount, _setPageCount]: [number, Dispatch<SetStateAction<number>>] = useState<number>(getPageCount(pagination.entryCount, pagination.entryCountPerPage));
+    const [numPaginationButtons, _setNumPaginationButtons]: [number, Dispatch<SetStateAction<number>>] = useState<number>(5);
 
     return (
         <>

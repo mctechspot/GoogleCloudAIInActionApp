@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Roboto_Mono, Roboto_Serif } from "next/font/google";
+import { Geist, Geist_Mono, Roboto_Serif } from "next/font/google";
 import "./globals.css";
 import HomeConfig from "@/app/config/home.json";
 
@@ -13,11 +13,6 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-const robotoMono = Roboto_Mono({
-  variable: "--font-roboto-mono",
-  subsets: ["latin"],
-});
-
 const robotoSerif = Roboto_Serif({
   variable: "--font-roboto-serif",
   subsets: ["latin"],
@@ -25,8 +20,8 @@ const robotoSerif = Roboto_Serif({
 
 
 export const metadata: Metadata = {
-  title: HomeConfig.en.app_name,
-  description: HomeConfig.en.description,
+  title: HomeConfig.en.brand_name,
+  description: HomeConfig.en.tag_line,
 };
 
 export default function RootLayout({

@@ -1,5 +1,5 @@
 import { Collection, Db, MongoClient } from "mongodb";
-import { OrbitClassType, AsteroidType, AsteroidExtendedType } from "@/app/types/asteroid";
+import { OrbitClassType, AsteroidType, AsteroidExtendedType } from "@/types/asteroid";
 
 export const getOrbitClassTypes = async (): Promise<OrbitClassType[]> => {
     // Connect to MongoDB database

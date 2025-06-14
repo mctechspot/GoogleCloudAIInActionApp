@@ -1,6 +1,6 @@
 import PDFDocument from 'pdfkit'
 import fs from 'fs'
-import { AsteroidExtendedType } from '@/app/types/asteroid';
+import { AsteroidExtendedType } from '@/types/asteroid';
 import { prettifyDate } from "@/app/utils/formatter";
 import ReportConfig from "@/app/config/report.json";
 import { v4 as uuidv4 } from 'uuid';
@@ -95,20 +95,19 @@ export const generatePDF = async (asteroid: AsteroidExtendedType, reportContent:
                 .fontSize(12)
                 .table()
                 .row([ReportConfig.en.asteroid.name, asteroid.name])
-                .row([ReportConfig.en.asteroid.absolute_magnitude_h, asteroid.absolute_magnitude_h])
-                .row([ReportConfig.en.asteroid.estimated_diameter_min, asteroid.estimated_diameter_min])
-                .row([ReportConfig.en.asteroid.estimated_diameter_max, asteroid.estimated_diameter_max])
-                .row([ReportConfig.en.asteroid.is_potentially_hazardous, asteroid.is_potentially_hazardous])
+                .row([ReportConfig.en.asteroid.absolute_magnitude_h, asteroid.absolute_magnitude_h.toString()])
+                .row([ReportConfig.en.asteroid.estimated_diameter_min, asteroid.estimated_diameter_min.toString()])
+                .row([ReportConfig.en.asteroid.estimated_diameter_max, asteroid.estimated_diameter_max.toString()])
+                .row([ReportConfig.en.asteroid.is_potentially_hazardous, asteroid.is_potentially_hazardous.toString()])
                 .row([ReportConfig.en.asteroid.orbit_id, asteroid.orbit_id])
                 .row([ReportConfig.en.asteroid.orbit_determination_date, prettifyDate(asteroid.orbit_determination_date, true)])
                 .row([ReportConfig.en.asteroid.first_observation_date, prettifyDate(asteroid.first_observation_date, false)])
                 .row([ReportConfig.en.asteroid.last_observation_date, prettifyDate(asteroid.last_observation_date, false)])
-                .row([ReportConfig.en.asteroid.semi_major_axis, asteroid.semi_major_axis])
-                .row([ReportConfig.en.asteroid.inclination, asteroid.inclination])
+                .row([ReportConfig.en.asteroid.semi_major_axis, asteroid.semi_major_axis.toString()])
+                .row([ReportConfig.en.asteroid.inclination, asteroid.inclination.toString()])
                 .row([`${ReportConfig.en.asteroid.orbit_class_type.title} ${ReportConfig.en.asteroid.orbit_class_type.details.abbreviation}`, asteroid.orbit_class_type.abbreviation])
                 .row([`${ReportConfig.en.asteroid.orbit_class_type.title} ${ReportConfig.en.asteroid.orbit_class_type.details.name}`, asteroid.orbit_class_type.name])
                 .row([`${ReportConfig.en.asteroid.orbit_class_type.title} ${ReportConfig.en.asteroid.orbit_class_type.details.description}`, asteroid.orbit_class_type.description]);
-
 
             // New page with report content
             // Add page with asteroid details

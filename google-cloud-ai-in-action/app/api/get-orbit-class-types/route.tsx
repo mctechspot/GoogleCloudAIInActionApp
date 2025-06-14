@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getOrbitClassTypes } from "@/app/mongodb/queries";
-import { OrbitClassType } from "@/app/types/asteroid";
+import { OrbitClassType } from "@/types/asteroid";
 
 export const GET = async(): Promise<NextResponse> => {
     try {

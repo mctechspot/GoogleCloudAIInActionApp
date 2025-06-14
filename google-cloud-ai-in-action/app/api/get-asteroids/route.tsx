@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { getAsteroids } from "@/app/mongodb/queries";
-import { AsteroidExtendedType } from "@/app/types/asteroid";
+import { AsteroidExtendedType } from "@/types/asteroid";
 
 export const GET = async(): Promise<NextResponse> => {
     try {

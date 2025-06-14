@@ -1,7 +1,7 @@
 export const prettifyDate = (dateString: string, includeTime: boolean) => {
     const dateStringReformatted: string = `${dateString.split(" ")[0]}T${dateString.split(" ")[1]}Z`;
     const date: Date = new Date(dateStringReformatted);
-    const options = {
+    const options: Intl.DateTimeFormatOptions = {
         year: "numeric",
         month: "long",
         day: "numeric",
