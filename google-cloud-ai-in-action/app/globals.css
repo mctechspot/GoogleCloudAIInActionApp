@@ -31,7 +31,7 @@ button {
   cursor: pointer;
 }
 
-.main-layout{
+.main-layout {
   display: grid;
   grid-template-rows: auto 1fr auto;
   height: 100%;
@@ -68,8 +68,8 @@ button {
   background-color: var(--grey-dark);
 }
 
-.bg-offwhite{
-    background-color: var(--offwhite);
+.bg-offwhite {
+  background-color: var(--offwhite);
 }
 
 .text-center {
@@ -241,4 +241,43 @@ button {
   width: 100%;
   border: none;
   border-radius: 10px;
+}
+
+.asteroids-loader-container {
+  border: none;
+  border-radius: 10px;
+  display: block;
+  margin: auto;
+  position: relative;
+  height: 250px;
+  width: 250px;
+}
+
+.asteroids-loader {
+  border: none;
+  border-radius: 10px;
+  object-fit: cover;
+  object-position: center;
+  height: 100%;
+  width: 100%;
+}
+
+.pagination-buttons-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.pagination-button{
+  border: solid 1px var(--navy);
+  border-radius: 5px;
+  height: 30px;
+  width: 30px;
+  color: var(--navy);
+}
+
+.pagination-button-current{
+  background-color: var(--navy);
+  color: var(--white);
 }
