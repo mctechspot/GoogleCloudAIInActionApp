@@ -5,7 +5,12 @@ import AsteroidsImage from "@/public/asteroids.jpeg";
 export default function Home() {
   return (
     <div className={"home-container bg-navy"}>
-      {/*<Image />*/}
+      <Image
+        src={AsteroidsImage}
+        alt={"Asteroids"}
+        height={100}
+        width={100}
+      />
     </div>
   );
 }

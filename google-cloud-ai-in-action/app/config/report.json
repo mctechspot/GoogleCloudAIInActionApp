@@ -1,6 +1,9 @@
 {
     "en": {
-        "details": {
+        "brand_name": "Asteroid Collection",
+        "tag_line": "Educating the public about the asteroids in our universe.",
+        "start_year":2025,
+        "asteroid": {
             "_id": "ID",
             "name": "Name",
             "absolute_magnitude_h": "Absolute Magnitude",
