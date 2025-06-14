@@ -30,7 +30,6 @@ export default function Browse() {
             });
             if (apiRes.status === 200) {
                 const asteroids: AsteroidExtendedType[] = await apiRes.json();
-                setError(true);
                 setAsteroids(asteroids);
                 setPagination({
                     entryCount: asteroids.length,
@@ -42,6 +41,7 @@ export default function Browse() {
             if (error instanceof Error) {
                 console.log(`Error getting asteroids from server: ${error.message}`);
             }
+            setError(true);
             throw error;
         }
     }
@@ -76,12 +76,11 @@ export default function Browse() {
                     <div className={""}>
                         <div className={"main-padding grid-vertical-gap-20px"}>
                             <p className={"heading-1 text-uppercase text-center"}>{BrowseConfig.en.title}</p>
-                            <br />
                             <div className={"grid-vertical-gap-20px"}>
                                 {BrowseConfig.en.description.map((paragraph: string, index: number) => {
                                     return (
                                         <p key={`browse-description-paragraph-${index + 1}`}
-                                            className={"text-justify"}>
+                                            className={"text-center"}>
                                             {paragraph}
                                         </p>
                                     );
@@ -106,12 +105,18 @@ export default function Browse() {
                                         />
 
                                         {/* List asteroids */}
-                                        {asteroids.slice(pagination.currentPageIndex, pagination.entryCountPerPage).map((asteroid: AsteroidExtendedType) => {
+                                        {asteroids.slice(pagination.currentPageIndex * pagination.entryCountPerPage, pagination.currentPageIndex * pagination.entryCountPerPage + pagination.entryCountPerPage).map((asteroid: AsteroidExtendedType) => {
                                             return (
                                                 <Asteroid key={`asteroid-${asteroid._id}`}
                                                     asteroid={asteroid} />
                                             );
                                         })}
+
+                                        {/* Pagination */}
+                                        <Pagination
+                                            pagination={pagination}
+                                            setPagination={setPagination}
+                                        />
                                     </>
                                 ) : (
 

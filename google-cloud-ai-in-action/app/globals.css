@@ -4,8 +4,10 @@
   --background: #ffffff;
   --foreground: #171717;
   --grey-dark: #1E1E1E;
+  --grey-light: rgb(210, 210, 210)E;
   --navy: #121F33;
   --navy-medium: #333D4D;
+  --navy-light: #8D9AAF;
   --red-medium: #F54242;
   --blue-medium: #4287F5;
   --green-medium: #48F542;
@@ -205,7 +207,9 @@ button {
 }
 
 #form-search-input {
-  border: solid 1px var(--navy);
+  /*border: solid 1px var(--navy);*/
+  background-color: var(--white);
+  border: none;
   border-radius: 10px;
   padding: 20px;
   outline: none;
@@ -262,22 +266,31 @@ button {
   width: 100%;
 }
 
-.pagination-buttons-container{
+.pagination-buttons-container {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
 }
 
-.pagination-button{
+.pagination-button {
   border: solid 1px var(--navy);
   border-radius: 5px;
-  height: 30px;
-  width: 30px;
+  height: 35px;
+  width: 35px;
   color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.pagination-button-current{
+.pagination-button-current {
   background-color: var(--navy);
   color: var(--white);
+}
+
+.pagination-button-disabled {
+  border: solid 1px var(--navy-light);
+  color: var(--navy-light);
+  cursor: default;
 }
