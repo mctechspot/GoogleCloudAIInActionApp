@@ -11,7 +11,7 @@ export const GET = async (req: NextRequest): Promise<NextResponse> => {
         return NextResponse.json(asteroids, { status: 200 });
     } catch (error: unknown) {
         if (error instanceof Error) {
-            console.log(`Error getting asteroids: ${error.message}`);
+            console.error(`Error getting asteroids: ${error.message}`);
         }
         return NextResponse.json({ "error": "Error getting asteroids" }, { status: 500 });
     }

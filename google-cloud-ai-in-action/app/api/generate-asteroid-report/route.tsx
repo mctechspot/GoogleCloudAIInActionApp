@@ -13,7 +13,6 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
         if (!asteroid){
             return NextResponse.json({ error: "Incorrect POST payload for generating report." }, { status: 422 });
         } else {
-            console.log(asteroid);
             const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
             let report = "";
             const response = await ai.models.generateContent({
@@ -48,7 +47,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
         if (error instanceof Error) {
             statusCode = error.message.includes(`"error":{"code":503`) ? 503 : statusCode;
             message = error.message.includes(`"error":{"code":503`) ? `Error generating asteroid report. Model ${modelName} is overloaded. Please try again later.` : `Error generating asteroid report: ${error.message}`;
-            console.log(`Error generating asteroid report: ${error.message}`);
+            console.error(`Error generating asteroid report: ${error.message}`);
         }
         return NextResponse.json({ "error": message }, { status: statusCode });
     }

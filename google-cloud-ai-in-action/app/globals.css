@@ -118,9 +118,12 @@ button {
   font-size: 1.1rem;
 }
 
-
 .text-uppercase {
   text-transform: uppercase;
+}
+
+.cursor-default{
+  cursor: default;
 }
 
 .grid-vertical-gap-10px {
@@ -431,12 +434,12 @@ button {
   padding: 10px;
 }
 
-.report-individual-notification-container {
+.report-notification-container {
   border: none;
   border-radius: 10px;
   padding: 20px;
   width: 500px;
-  position: sticky;
+  position: fixed;
   display: flex;
   justify-self: end;
   top: 100px;
@@ -444,14 +447,14 @@ button {
   z-index: 2;
 }
 
-.report-individual-notification-content {
+.report-notification-content {
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
 }
 
-.report-individual-notification-loader {
+.report-notification-loader {
   height: 20px;
   width: 20px;
 }
@@ -460,4 +463,10 @@ button {
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.report-notification-close-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
 }

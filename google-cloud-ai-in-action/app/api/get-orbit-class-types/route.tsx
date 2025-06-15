@@ -9,7 +9,7 @@ export const GET = async(): Promise<NextResponse> => {
         return NextResponse.json(orbitClassTypes, { status: 200 });
     } catch (error: unknown) {
         if (error instanceof Error) {
-            console.log(`Error getting orbit class types: ${error.message}`);
+            console.error(`Error getting orbit class types: ${error.message}`);
         }
         return NextResponse.json({ "error": "Error getting orbit class types" }, { status: 500 });
     }

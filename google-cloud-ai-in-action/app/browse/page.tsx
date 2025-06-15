@@ -5,15 +5,12 @@ import Header from "@/app/components/navigation/Header";
 import Footer from "@/app/components/navigation/Footer";
 import { FormEvent } from "react";
 import { AsteroidExtendedType } from "@/types/asteroid";
-import Asteroid from "@/app/components/asteroids/ListedAsteroid";
+import ListedAsteroid from "@/app/components/asteroids/ListedAsteroid";
 import { PaginationType } from "@/types/pagination";
-import { ReportNotificationType, ReportNotificationWrapperType } from "@/types/report";
+import { ReportNotificationType } from "@/types/report";
 import Pagination from "@/app/components/asteroids/Pagination";
 import ReportNotification from "@/app/components/asteroids/ReportNotification";
-
-export type SearchFormType = {
-    input: string;
-}
+import { SearchFormType } from "@/types/form";
 
 export default function Browse() {
 
@@ -23,12 +20,7 @@ export default function Browse() {
     const defaultEntryCountPerPage: number = 10;
     const defaultCurrentPageIndex: number = 0;
     const [pagination, setPagination]: [PaginationType | null, Dispatch<SetStateAction<PaginationType | null>>] = useState<PaginationType | null>(null);
-    const [generatingReport, setGeneratingReport]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
-    const defaultReportNotificaton: ReportNotificationType = {
-        status: 500,
-        message: "Error generating report for",
-        asteroidName: "433 Eros"
-    };
+    const [reportNotification, setReportNotification]: [ReportNotificationType | null, Dispatch<SetStateAction<ReportNotificationType | null>>] = useState<ReportNotificationType | null>(null);
 
     const getAsteroids = async (): Promise<void> => {
         setError(false);
@@ -49,7 +41,7 @@ export default function Browse() {
             }
         } catch (error: unknown) {
             if (error instanceof Error) {
-                console.log(`Error getting asteroids from server: ${error.message}`);
+                console.error(`Error getting asteroids from server: ${error.message}`);
             }
             setError(true);
             throw error;
@@ -66,7 +58,7 @@ export default function Browse() {
             getAsteroids();
         } catch (error: unknown) {
             if (error instanceof Error) {
-                console.log(`Error handling asteroid search: ${error.message}`);
+                console.error(`Error handling asteroid search: ${error.message}`);
                 throw error;
             }
         }
@@ -82,9 +74,12 @@ export default function Browse() {
                 <div className={"main-content bg-offwhite"}>
 
                     {/* Report Notification */}
-                    <ReportNotification
-                        reportNotification={defaultReportNotificaton}
-                    />
+                    {reportNotification ? (
+                        <ReportNotification
+                            reportNotification={reportNotification}
+                            setReportNotification={setReportNotification}
+                        />
+                    ) : ("")}
 
                     <div className={""}>
                         <div className={"main-padding grid-vertical-gap-20px"}>
@@ -110,29 +105,36 @@ export default function Browse() {
 
                                 {asteroids && pagination ? (
                                     <>
-
-                                        {/* Pagination */}
-                                        <Pagination
-                                            pagination={pagination}
-                                            setPagination={setPagination}
-                                        />
-
                                         {/* List asteroids */}
-                                        {asteroids.slice(pagination.currentPageIndex * pagination.entryCountPerPage, pagination.currentPageIndex * pagination.entryCountPerPage + pagination.entryCountPerPage).map((asteroid: AsteroidExtendedType) => {
-                                            return (
-                                                <Asteroid key={`asteroid-${asteroid._id}`}
-                                                    asteroid={asteroid}
-                                                    generatingReport={generatingReport}
-                                                    setGeneratingReport={setGeneratingReport}
+                                        {asteroids.length > 0 ? (
+                                            <>
+                                                {/* Pagination */}
+                                                <Pagination
+                                                    pagination={pagination}
+                                                    setPagination={setPagination}
                                                 />
-                                            );
-                                        })}
+                                                {asteroids.slice(pagination.currentPageIndex * pagination.entryCountPerPage, pagination.currentPageIndex * pagination.entryCountPerPage + pagination.entryCountPerPage).map((asteroid: AsteroidExtendedType) => {
+                                                    return (
+                                                        <ListedAsteroid key={`asteroid-${asteroid._id}`}
+                                                            asteroid={asteroid}
+                                                            reportNotification={reportNotification}
+                                                            setReportNotification={setReportNotification}
+                                                        />
+                                                    );
+                                                })}
+                                                {/* Pagination */}
+                                                <Pagination
+                                                    pagination={pagination}
+                                                    setPagination={setPagination}
+                                                />
+                                            </>
 
-                                        {/* Pagination */}
-                                        <Pagination
-                                            pagination={pagination}
-                                            setPagination={setPagination}
-                                        />
+                                        ) : (
+                                            <p className={"text-center"}>
+                                                No asteroids found based on your search filter. Adjust and try again.
+                                            </p>
+                                        )}
+
                                     </>
                                 ) : (
 
@@ -142,15 +144,6 @@ export default function Browse() {
                                             <div className={"loader"}></div>
                                         </div>
 
-                                        {/*<div className={"asteroids-loader-container"}>
-                                            <Image
-                                                className={"asteroids-loader"}
-                                                src={AsteroidsLoader}
-                                                alt={"Asteroids Loader"}
-                                                height={100}
-                                                width={100}
-                                            />
-                                        </div>*/}
                                     </>
 
                                 )}

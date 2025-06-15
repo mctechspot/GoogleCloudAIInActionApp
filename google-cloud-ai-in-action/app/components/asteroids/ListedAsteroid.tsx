@@ -7,35 +7,64 @@ import AsteroidConfig from "@/app/config/asteroid.json";
 import { prettifyDate } from "@/app/utils/formatter";
 import PDFIcon from "@/app/components/icons/PDFIcon";
 
-export default function ListedAsteroid({ asteroid, generatingReport, setGeneratingReport }: AsteroidExtendedWrapperType) {
+export default function ListedAsteroid({ asteroid, reportNotification, setReportNotification }: AsteroidExtendedWrapperType) {
     const [showDetails, setShowDetails]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
 
     const generatePDFReport = async (): Promise<void> => {
-        setGeneratingReport(true);
-        const apiUri: string = "/api/generate-asteroid-report";
-        const pdfResponse: Response = await fetch(apiUri, {
-            method: "POST",
-            body: JSON.stringify(asteroid),
-            headers: {
-                "Content-type": "application/json"
-            },
-        });
-        setGeneratingReport(false);
-        if (pdfResponse.status === 200) {
-            console.log(`Report generated for asteroid ${asteroid.name}`);
-
-            // Download returned link
-            const blob = await pdfResponse.blob();
-            const url = URL.createObjectURL(blob);
-            const link = document.createElement("a");
-            link.href = url;
-            link.download = `asteroid_${asteroid.name.replace(" ", "_")}_report.pdf`;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-            URL.revokeObjectURL(url);
-        } else {
-            console.log(`Error generating report: ${pdfResponse.status}: ${pdfResponse.statusText}: ${pdfResponse.text}`);
+        try {
+            setReportNotification({
+                status: 202,
+                message: `Generating report for asteroid ${asteroid.name}.`,
+                asteroidName: asteroid.name
+            });
+            const apiUri: string = "/api/generate-asteroid-report";
+            const pdfResponse: Response = await fetch(apiUri, {
+                method: "POST",
+                body: JSON.stringify(asteroid),
+                headers: {
+                    "Content-type": "application/json"
+                },
+            });
+            if (pdfResponse.status === 200) {
+                console.error(`Report generated for asteroid ${asteroid.name}`);
+                // Download returned link
+                const blob = await pdfResponse.blob();
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement("a");
+                link.href = url;
+                link.download = `asteroid_${asteroid.name.replace(" ", "_")}_report.pdf`;
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+                URL.revokeObjectURL(url);
+                setReportNotification({
+                    status: 200,
+                    message: `Successfully generated report for asteroid ${asteroid.name}.`,
+                    asteroidName: asteroid.name
+                });
+            } else if (pdfResponse.status === 503) {
+                console.error(`Model to generate report is overloaded.`);
+                setReportNotification({
+                    status: 503,
+                    message: `Model to generate report on asteroid ${asteroid.name} is overloaded. Try again later.`,
+                    asteroidName: asteroid.name
+                });
+            }
+            else {
+                console.error(`Error generating report: ${pdfResponse.status}: ${pdfResponse.statusText}: ${pdfResponse.text}`);
+                setReportNotification({
+                    status: 500,
+                    message: `Error generating report for asteroid ${asteroid.name}.`,
+                    asteroidName: asteroid.name
+                });
+            }
+        } catch (error: unknown) {
+            let message: string = `Error generating PDF report on asteroid ${asteroid.name}`;
+            if (error instanceof Error) {
+                message += `: ${error.message}`;
+            }
+            console.error(message);
+            throw error;
         }
     }
 
@@ -81,13 +110,13 @@ export default function ListedAsteroid({ asteroid, generatingReport, setGenerati
                                 <div className={"listed-asteroid-details-section"}>
 
                                     {/* Generate PDF button */}
-                                    <button disabled={generatingReport ? false : true}
-                                        type={"button"} className={"button-asteroid-pdf-generator"}
+                                    <button disabled={reportNotification && reportNotification.status === 202 ? true : false}
+                                        type={"button"} className={`button-asteroid-pdf-generator ${reportNotification && reportNotification.status ? "cursor-default": ""}`}
                                         onClick={() => generatePDFReport()}>
                                         <PDFIcon
                                             height={30}
                                             width={30}
-                                            colour={"#121F33"}
+                                            colour={reportNotification && reportNotification.status === 202 ? "#8D9AAF" : "#121F33"}
                                         />
                                     </button>
 

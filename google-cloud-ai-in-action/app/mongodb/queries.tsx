@@ -15,7 +15,7 @@ export const getOrbitClassTypes = async (): Promise<OrbitClassType[]> => {
         return orbitClassTypes;
     } catch (error: unknown) {
         if (error instanceof Error) {
-            console.log(`Error getting orbit class types: ${error.message}`);
+            console.error(`Error getting orbit class types: ${error.message}`);
         }
         throw error;
     } finally {
@@ -46,7 +46,7 @@ export const getAsteroids = async (filter: string = ""): Promise<AsteroidExtende
         return asteroids;
     } catch (error: unknown) {
         if (error instanceof Error) {
-            console.log(`Error getting asteroids: ${error.message}`);
+            console.error(`Error getting asteroids: ${error.message}`);
         }
         throw error;
     } finally {

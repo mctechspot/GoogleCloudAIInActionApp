@@ -145,7 +145,7 @@ export const generatePDF = async (asteroid: AsteroidExtendedType, reportContent:
             let message: string = `Error generating PDF`;
             if (error instanceof Error) {
                 message += `: ${error.message}`;
-                console.log(message);
+                console.error(message);
             }
             reject(error);
         }
