@@ -1,0 +1,6 @@
+services:
+  google-cloud-ai-in-action-frontend:
+    image: asteroids:latest
+    container_name: asteroids-frontend
+    ports:
+      - "3000:3000"
