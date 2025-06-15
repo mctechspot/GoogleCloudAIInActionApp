@@ -7,7 +7,9 @@ import { FormEvent } from "react";
 import { AsteroidExtendedType } from "@/types/asteroid";
 import Asteroid from "@/app/components/asteroids/ListedAsteroid";
 import { PaginationType } from "@/types/pagination";
+import { ReportNotificationType, ReportNotificationWrapperType } from "@/types/report";
 import Pagination from "@/app/components/asteroids/Pagination";
+import ReportNotification from "@/app/components/asteroids/ReportNotification";
 
 export type SearchFormType = {
     input: string;
@@ -15,12 +17,18 @@ export type SearchFormType = {
 
 export default function Browse() {
 
-    const [searchInput, setSearchInput]: [SearchFormType, Dispatch<SetStateAction<SearchFormType>>] = useState<SearchFormType>({input: ""});
+    const [searchInput, setSearchInput]: [SearchFormType, Dispatch<SetStateAction<SearchFormType>>] = useState<SearchFormType>({ input: "" });
     const [asteroids, setAsteroids]: [AsteroidExtendedType[] | null, Dispatch<SetStateAction<AsteroidExtendedType[] | null>>] = useState<AsteroidExtendedType[] | null>(null);
     const [error, setError]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
     const defaultEntryCountPerPage: number = 10;
     const defaultCurrentPageIndex: number = 0;
     const [pagination, setPagination]: [PaginationType | null, Dispatch<SetStateAction<PaginationType | null>>] = useState<PaginationType | null>(null);
+    const [generatingReport, setGeneratingReport]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
+    const defaultReportNotificaton: ReportNotificationType = {
+        status: 500,
+        message: "Error generating report for",
+        asteroidName: "433 Eros"
+    };
 
     const getAsteroids = async (): Promise<void> => {
         setError(false);
@@ -72,6 +80,12 @@ export default function Browse() {
 
                 {/* Main Content */}
                 <div className={"main-content bg-offwhite"}>
+
+                    {/* Report Notification */}
+                    <ReportNotification
+                        reportNotification={defaultReportNotificaton}
+                    />
+
                     <div className={""}>
                         <div className={"main-padding grid-vertical-gap-20px"}>
                             <p className={"heading-1 font-weight-900 text-center"}>{BrowseConfig.en.title}</p>
@@ -89,7 +103,7 @@ export default function Browse() {
                                 <form id={"form-search"} method={"POST"} onSubmit={(event) => handlesearch(event)}>
                                     <div id={"form-search-content"}>
                                         <input id={"form-search-input"} className={"input-text"} type={"text"} placeholder={BrowseConfig.en.search.placeholder}
-                                            onChange={(event) => setSearchInput({input: event.target.value ? event.target.value.trim() : ""})} />
+                                            onChange={(event) => setSearchInput({ input: event.target.value ? event.target.value.trim() : "" })} />
                                         <button id={"form-search-submit"} type={"submit"}>{BrowseConfig.en.search.button}</button>
                                     </div>
                                 </form>
@@ -107,7 +121,10 @@ export default function Browse() {
                                         {asteroids.slice(pagination.currentPageIndex * pagination.entryCountPerPage, pagination.currentPageIndex * pagination.entryCountPerPage + pagination.entryCountPerPage).map((asteroid: AsteroidExtendedType) => {
                                             return (
                                                 <Asteroid key={`asteroid-${asteroid._id}`}
-                                                    asteroid={asteroid} />
+                                                    asteroid={asteroid}
+                                                    generatingReport={generatingReport}
+                                                    setGeneratingReport={setGeneratingReport}
+                                                />
                                             );
                                         })}
 
@@ -124,7 +141,7 @@ export default function Browse() {
                                         <div className={"loader-container"}>
                                             <div className={"loader"}></div>
                                         </div>
-                                        
+
                                         {/*<div className={"asteroids-loader-container"}>
                                             <Image
                                                 className={"asteroids-loader"}

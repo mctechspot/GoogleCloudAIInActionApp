@@ -8,10 +8,10 @@
   --navy: #121F33;
   --navy-medium: #333D4D;
   --navy-light: #8D9AAF;
-  --red-medium: #F54242;
+  --red-medium: #ab4444;
   --blue-medium: #4287F5;
-  --green-medium: #48F542;
-  --yellow-medium: #EFF542;
+  --green-medium: #57a155;
+  --yellow-medium: #bcb15c;
   --white: #FFFFFF;
   --offwhite: #E6E9EF;
   --black: #000000;
@@ -70,8 +70,24 @@ button {
   background-color: var(--grey-dark);
 }
 
+.bg-white {
+  background-color: var(--white);
+}
+
 .bg-offwhite {
   background-color: var(--offwhite);
+}
+
+.bg-green-medium {
+  background-color: var(--green-medium);
+}
+
+.bg-red-medium {
+  background-color: var(--red-medium);
+}
+
+.bg-yellow-medium {
+  background-color: var(--yellow-medium);
 }
 
 .text-center {
@@ -117,6 +133,12 @@ button {
   display: grid;
   grid-template-columns: auto;
   gap: 20px;
+}
+
+#header {
+  position: sticky;
+  top: 0;
+  z-index: 2;
 }
 
 .header-content {
@@ -400,11 +422,42 @@ button {
   }
 }
 
-.button-asteroid-pdf-generator{
+.button-asteroid-pdf-generator {
   background-color: var(--offwhite);
   border: none;
   border-radius: 20px;
   position: absolute;
   right: 0;
   padding: 10px;
+}
+
+.report-individual-notification-container {
+  border: none;
+  border-radius: 10px;
+  padding: 20px;
+  width: 500px;
+  position: sticky;
+  display: flex;
+  justify-self: end;
+  top: 100px;
+  right: 10px;
+  z-index: 2;
+}
+
+.report-individual-notification-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+}
+
+.report-individual-notification-loader {
+  height: 20px;
+  width: 20px;
+}
+
+.report-notification-icon-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

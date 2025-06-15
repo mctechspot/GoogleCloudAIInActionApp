@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction } from "react";
+
 export type OrbitClassType = {
     _id: string;
     abbreviation: string;
@@ -39,4 +41,6 @@ export type AsteroidExtendedType = {
 
 export type AsteroidExtendedWrapperType = {
     asteroid: AsteroidExtendedType;
+    generatingReport: boolean;
+    setGeneratingReport: Dispatch<SetStateAction<boolean>>;
 }

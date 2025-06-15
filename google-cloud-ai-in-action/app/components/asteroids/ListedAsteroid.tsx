@@ -7,10 +7,11 @@ import AsteroidConfig from "@/app/config/asteroid.json";
 import { prettifyDate } from "@/app/utils/formatter";
 import PDFIcon from "@/app/components/icons/PDFIcon";
 
-export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType) {
+export default function ListedAsteroid({ asteroid, generatingReport, setGeneratingReport }: AsteroidExtendedWrapperType) {
     const [showDetails, setShowDetails]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
 
     const generatePDFReport = async (): Promise<void> => {
+        setGeneratingReport(true);
         const apiUri: string = "/api/generate-asteroid-report";
         const pdfResponse: Response = await fetch(apiUri, {
             method: "POST",
@@ -19,6 +20,7 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
                 "Content-type": "application/json"
             },
         });
+        setGeneratingReport(false);
         if (pdfResponse.status === 200) {
             console.log(`Report generated for asteroid ${asteroid.name}`);
 
@@ -79,7 +81,8 @@ export default function ListedAsteroid({ asteroid }: AsteroidExtendedWrapperType
                                 <div className={"listed-asteroid-details-section"}>
 
                                     {/* Generate PDF button */}
-                                    <button type={"button"} className={"button-asteroid-pdf-generator"}
+                                    <button disabled={generatingReport ? false : true}
+                                        type={"button"} className={"button-asteroid-pdf-generator"}
                                         onClick={() => generatePDFReport()}>
                                         <PDFIcon
                                             height={30}

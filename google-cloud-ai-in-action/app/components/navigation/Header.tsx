@@ -1,5 +1,5 @@
 import Link from "next/link";
-import Asteroid from "@/app/components/icons/Asteroid";
+import Asteroid from "@/app/components/icons/AsteroidIcon";
 import HeaderConfig from "@/app/config/header.json";
 
 export default function Header() {
