@@ -1,6 +1,6 @@
 import { IconType } from "@/types/icon";
 
-export default function ChevronDown({ height, width, colour }: IconType) {
+export default function ChevronDownIcon({ height, width, colour }: IconType) {
     return (
         <>
             <svg width={width} height={height} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

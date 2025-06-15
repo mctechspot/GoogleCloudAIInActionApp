@@ -3,7 +3,7 @@ import Image from "next/image";
 import HeaderConfig from "@/app/config/header.json";
 import HomeConfig from "@/app/config/home.json";
 import AsteroidsImage from "@/public/asteroids.png";
-import ChevronRight from "@/app/components/icons/ChevronRight";
+import ChevronRightIcon from "@/app/components/icons/ChevronRightIcon";
 
 export default function Home() {
 
@@ -34,7 +34,7 @@ export default function Home() {
             <span>
               {HeaderConfig.en.nav.info.title}
             </span>
-            <ChevronRight
+            <ChevronRightIcon
               height={20}
               width={20}
               colour={"#FFFFFF"}
@@ -47,7 +47,7 @@ export default function Home() {
             <span>
               {HeaderConfig.en.nav.browse.title}
             </span>
-            <ChevronRight
+            <ChevronRightIcon
               height={20}
               width={20}
               colour={"#FFFFFF"}

@@ -1,8 +1,8 @@
 "use client"
 import { Dispatch, SetStateAction, useState } from "react";
 import { AsteroidExtendedWrapperType } from "@/types/asteroid";
-import ChevronDown from "@/app/components/icons/ChevronDown";
-import ChevronUp from "@/app/components/icons/ChevronUp";
+import ChevronDownIcon from "@/app/components/icons/ChevronDownIcon";
+import ChevronUpIcon from "@/app/components/icons/ChevronUpIcon";
 import AsteroidConfig from "@/app/config/asteroid.json";
 import { prettifyDate } from "@/app/utils/formatter";
 import PDFIcon from "@/app/components/icons/PDFIcon";
@@ -26,7 +26,6 @@ export default function ListedAsteroid({ asteroid, reportNotification, setReport
                 },
             });
             if (pdfResponse.status === 200) {
-                console.error(`Report generated for asteroid ${asteroid.name}`);
                 // Download returned link
                 const blob = await pdfResponse.blob();
                 const url = URL.createObjectURL(blob);
@@ -83,13 +82,13 @@ export default function ListedAsteroid({ asteroid, reportNotification, setReport
                         <button className={"listed-asteroid-button"}
                             type={"button"} onClick={() => setShowDetails(!showDetails)}>
                             {showDetails ? (
-                                <ChevronUp
+                                <ChevronUpIcon
                                     height={20}
                                     width={20}
                                     colour={"#121F33"}
                                 />
                             ) : (
-                                <ChevronDown
+                                <ChevronDownIcon
                                     height={20}
                                     width={20}
                                     colour={"#121F33"}

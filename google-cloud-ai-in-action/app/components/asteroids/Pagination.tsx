@@ -1,10 +1,10 @@
 "use client"
 import { Dispatch, SetStateAction, useState } from "react";
 import { PaginationWrapperType } from "@/types/pagination";
-import ChevronDoubleLeft from "@/app/components/icons/ChevronDoubleLeft";
-import ChevronLeft from "@/app/components/icons/ChevronLeft";
-import ChevronDoubleRight from "@/app/components/icons/ChevronDoubleRight";
-import ChevronRight from "@/app/components/icons/ChevronRight";
+import ChevronDoubleLeftIcon from "@/app/components/icons/ChevronDoubleLeftIcon";
+import ChevronLeftIcon from "@/app/components/icons/ChevronLeftIcon";
+import ChevronDoubleRightIcon from "@/app/components/icons/ChevronDoubleRightIcon";
+import ChevronRightIcon from "@/app/components/icons/ChevronRightIcon";
 
 export default function Pagination({ pagination, setPagination }: PaginationWrapperType) {
 
@@ -69,7 +69,7 @@ export default function Pagination({ pagination, setPagination }: PaginationWrap
                                 className={`pagination-button pagination-button-left ${pagination.currentPageIndex === 0 ? "pagination-button-disabled" : ""}`}
                                 disabled={pagination.currentPageIndex === 0 ? true : false}
                                 onClick={() => setPagination({ ...pagination, currentPageIndex: 0 })}>
-                                <ChevronDoubleLeft
+                                <ChevronDoubleLeftIcon
                                     height={15}
                                     width={15}
                                     colour={pagination.currentPageIndex === 0 ? "#8D9AAF" : "#121F33"}
@@ -81,7 +81,7 @@ export default function Pagination({ pagination, setPagination }: PaginationWrap
                                 className={`pagination-button pagination-button-left ${pagination.currentPageIndex === 0 ? "pagination-button-disabled" : ""}`}
                                 disabled={pagination.currentPageIndex === 0 ? true : false}
                                 onClick={() => setPagination({ ...pagination, currentPageIndex: pagination.currentPageIndex - 1 })}>
-                                <ChevronLeft
+                                <ChevronLeftIcon
                                     height={15}
                                     width={15}
                                     colour={pagination.currentPageIndex === 0 ? "#8D9AAF" : "#121F33"}
@@ -104,7 +104,7 @@ export default function Pagination({ pagination, setPagination }: PaginationWrap
                                 className={`pagination-button pagination-button-next ${pagination.currentPageIndex === pageCount - 1 ? "pagination-button-disabled" : ""}`}
                                 disabled={pagination.currentPageIndex === pageCount - 1 ? true : false}
                                 onClick={() => setPagination({ ...pagination, currentPageIndex: pagination.currentPageIndex + 1 })}>
-                                <ChevronRight
+                                <ChevronRightIcon
                                     height={15}
                                     width={15}
                                     colour={pagination.currentPageIndex === pageCount - 1 ? "#8D9AAF" : "#121F33"}
@@ -116,7 +116,7 @@ export default function Pagination({ pagination, setPagination }: PaginationWrap
                                 className={`pagination-button pagination-button-next ${pagination.currentPageIndex === pageCount - 1 ? "pagination-button-disabled" : ""}`}
                                 disabled={pagination.currentPageIndex === pageCount - 1 ? true : false}
                                 onClick={() => setPagination({ ...pagination, currentPageIndex: pageCount - 1 })}>
-                                <ChevronDoubleRight
+                                <ChevronDoubleRightIcon
                                     height={15}
                                     width={15}
                                     colour={pagination.currentPageIndex === pageCount - 1 ? "#8D9AAF" : "#121F33"}

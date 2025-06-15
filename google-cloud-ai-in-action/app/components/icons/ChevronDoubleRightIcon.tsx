@@ -1,6 +1,6 @@
 import { IconType } from "@/types/icon";
 
-export default function ChevronDoubleRight({ height, width, colour }: IconType) {
+export default function ChevronDoubleRightIcon({ height, width, colour }: IconType) {
     return (
         <>
             <svg width={width} height={height} viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill={colour} className="bi bi-chevron-double-right">
