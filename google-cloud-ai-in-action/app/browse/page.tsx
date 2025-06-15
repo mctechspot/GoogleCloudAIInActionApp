@@ -9,9 +9,13 @@ import Asteroid from "@/app/components/asteroids/ListedAsteroid";
 import { PaginationType } from "@/types/pagination";
 import Pagination from "@/app/components/asteroids/Pagination";
 
+export type SearchFormType = {
+    input: string;
+}
+
 export default function Browse() {
 
-    const [searchInput, setSearchInput]: [string, Dispatch<SetStateAction<string>>] = useState<string>("");
+    const [searchInput, setSearchInput]: [SearchFormType, Dispatch<SetStateAction<SearchFormType>>] = useState<SearchFormType>({input: ""});
     const [asteroids, setAsteroids]: [AsteroidExtendedType[] | null, Dispatch<SetStateAction<AsteroidExtendedType[] | null>>] = useState<AsteroidExtendedType[] | null>(null);
     const [error, setError]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
     const defaultEntryCountPerPage: number = 10;
@@ -22,7 +26,7 @@ export default function Browse() {
         setError(false);
         setAsteroids(null);
         try {
-            const apiUri: string = "/api/get-asteroids";
+            const apiUri: string = `/api/get-asteroids?filter=${searchInput.input}`;
             const apiRes: Response = await fetch(apiUri, {
                 "method": "GET"
             });
@@ -51,6 +55,7 @@ export default function Browse() {
     const handlesearch = (event: FormEvent) => {
         try {
             event.preventDefault();
+            getAsteroids();
         } catch (error: unknown) {
             if (error instanceof Error) {
                 console.log(`Error handling asteroid search: ${error.message}`);
@@ -58,10 +63,6 @@ export default function Browse() {
             }
         }
     }
-
-    useEffect(() => {
-        console.log(searchInput);
-    }, [searchInput]);
 
     return (
         <>
@@ -88,7 +89,7 @@ export default function Browse() {
                                 <form id={"form-search"} method={"POST"} onSubmit={(event) => handlesearch(event)}>
                                     <div id={"form-search-content"}>
                                         <input id={"form-search-input"} className={"input-text"} type={"text"} placeholder={BrowseConfig.en.search.placeholder}
-                                            onChange={(event) => setSearchInput(event.target.value ? event.target.value.trim() : "")} />
+                                            onChange={(event) => setSearchInput({input: event.target.value ? event.target.value.trim() : ""})} />
                                         <button id={"form-search-submit"} type={"submit"}>{BrowseConfig.en.search.button}</button>
                                     </div>
                                 </form>
