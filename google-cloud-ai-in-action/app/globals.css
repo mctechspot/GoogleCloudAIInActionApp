@@ -126,6 +126,10 @@ button {
   cursor: default;
 }
 
+.cursor-pointer{
+  cursor: pointer;
+}
+
 .grid-vertical-gap-10px {
   display: grid;
   grid-template-columns: auto;

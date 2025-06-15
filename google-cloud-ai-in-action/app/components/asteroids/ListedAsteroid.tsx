@@ -110,7 +110,7 @@ export default function ListedAsteroid({ asteroid, reportNotification, setReport
 
                                     {/* Generate PDF button */}
                                     <button disabled={reportNotification && reportNotification.status === 202 ? true : false}
-                                        type={"button"} className={`button-asteroid-pdf-generator ${reportNotification && reportNotification.status ? "cursor-default": ""}`}
+                                        type={"button"} className={`button-asteroid-pdf-generator ${reportNotification && reportNotification.status ? "cursor-default": "cursor-pointer"}`}
                                         onClick={() => generatePDFReport()}>
                                         <PDFIcon
                                             height={30}
