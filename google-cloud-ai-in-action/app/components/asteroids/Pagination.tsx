@@ -10,7 +10,7 @@ export default function Pagination({ pagination, setPagination }: PaginationWrap
 
     const getEntryIndicesFromCurrentPageIndex = (currentPageIndex: number, entryCountPerPage: number) => {
         const index1 = (currentPageIndex) * entryCountPerPage;
-        const index2 = (currentPageIndex) * entryCountPerPage + entryCountPerPage;
+        const index2 = (currentPageIndex) * entryCountPerPage + entryCountPerPage <= pagination.entryCount ? (currentPageIndex) * entryCountPerPage + entryCountPerPage : pagination.entryCount;
         return [index1, index2];
     }
 
@@ -46,7 +46,7 @@ export default function Pagination({ pagination, setPagination }: PaginationWrap
                     <>
                         <div className={`pagination-buttons-container`}>
                             {/* Page Number Buttons  */}
-                            {Array.from({ length: getPageIndicesFromCurrentPageIndex(pagination.currentPageIndex, pageCount, numPaginationButtons)[1] - getPageIndicesFromCurrentPageIndex(pagination.currentPageIndex, pageCount, numPaginationButtons)[0] + 1 }, (_, i) => getPageIndicesFromCurrentPageIndex(pagination.currentPageIndex, pageCount, numPaginationButtons)[0] + i).map((pageNumber: number, index: number) => {
+                            {[...Array(pageCount).keys()].map((pageNumber: number, index: number) => {
                                 return (
                                     <button key={`page-button-${index + 1}`}
                                         className={`pagination-button ${pagination.currentPageIndex == index ? "pagination-button-current" : ""}`}
