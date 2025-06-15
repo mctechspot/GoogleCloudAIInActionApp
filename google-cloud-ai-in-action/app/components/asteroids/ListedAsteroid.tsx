@@ -42,7 +42,7 @@ export default function ListedAsteroid({ asteroid, reportNotification, setReport
                     asteroidName: asteroid.name
                 });
             } else if (pdfResponse.status === 503) {
-                console.error(`Model to generate report is overloaded.`);
+                console.warn(`Model to generate report is overloaded.`);
                 setReportNotification({
                     status: 503,
                     message: `Model to generate report on asteroid ${asteroid.name} is overloaded. Try again later.`,

@@ -10,7 +10,7 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
     try {
         // Generate report for asteroid
         const asteroid: AsteroidExtendedType | null = await req.json();
-        if (!asteroid){
+        if (!asteroid) {
             return NextResponse.json({ error: "Incorrect POST payload for generating report." }, { status: 422 });
         } else {
             const ai = new GoogleGenAI({ apiKey: process.env.GEMINI_API_KEY });
@@ -26,17 +26,24 @@ export const POST = async (req: NextRequest): Promise<NextResponse> => {
                 const fileBuffer = await fs.readFile(filePath);
                 const fileName = path.basename(filePath);
 
-                return new NextResponse(fileBuffer, {
+                // Prepare final successful response
+                const finalResponse: NextResponse = new NextResponse(fileBuffer, {
                     status: 200,
                     headers: {
                         'Content-type': 'application/pdf',
                         'Content-disposition': `attachment; filename="${fileName}"`,
                     },
                 });
+
+                // Remove file from /tmp to free up space
+                finalResponse.headers.set('X-Cleanup-Path', filePath);
+                fs.unlink(filePath)
+                    .catch(err => console.error(`Failed to delete generated report in /tmp: ${filePath}`, err));
+                return finalResponse;
             }
         }
 
-        return NextResponse.json({ error: "Report could not be generated" }, { status: 500 });
+        return NextResponse.json({ error: "Report could not be generated." }, { status: 500 });
 
     } catch (error: unknown) {
 
