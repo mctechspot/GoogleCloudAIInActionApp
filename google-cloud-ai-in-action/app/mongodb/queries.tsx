@@ -23,7 +23,7 @@ export const getOrbitClassTypes = async (): Promise<OrbitClassType[]> => {
     }
 }
 
-export const getAsteroids = async (filter: string = ""): Promise<AsteroidExtendedType[]> => {
+export const getAsteroids = async (input: string = "", orbitClassType: string = ""): Promise<AsteroidExtendedType[]> => {
     // Connect to MongoDB database
     const uri: string = process.env.MONGO_DB_CONNECTION_URI!;
     const client: MongoClient = new MongoClient(uri);
@@ -36,7 +36,7 @@ export const getAsteroids = async (filter: string = ""): Promise<AsteroidExtende
         // Fetch all asteroid data
         const db: Db = client.db('asteroids');
         const collection: Collection<AsteroidType> = db.collection('asteroids');
-        const asteroidsTemp: AsteroidType[] = await collection.find({name: {$regex: filter.trim(), $options: "i"}}).toArray();
+        const asteroidsTemp: AsteroidType[] = await collection.find({name: {$regex: input.trim(), $options: "i"}, orbit_class_type : {$eq: orbitClassType.trim()}}).toArray();
         const asteroids: AsteroidExtendedType[] = asteroidsTemp.map((asteroid: AsteroidType) => {
             return {
                 ...asteroid,

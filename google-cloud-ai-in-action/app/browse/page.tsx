@@ -15,7 +15,7 @@ import OrbitClassTypeDropdown from "@/app/components/dropdowns/OrbitClassTypeDro
 
 export default function Browse() {
 
-    const [searchInput, setSearchInput]: [SearchFormType, Dispatch<SetStateAction<SearchFormType>>] = useState<SearchFormType>({ input: "" });
+    const [searchFilters, setSearchFilters]: [SearchFormType, Dispatch<SetStateAction<SearchFormType>>] = useState<SearchFormType>({ input: "", orbitClassType: "" });
     const [asteroids, setAsteroids]: [AsteroidExtendedType[] | null, Dispatch<SetStateAction<AsteroidExtendedType[] | null>>] = useState<AsteroidExtendedType[] | null>(null);
     const [error, setError]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
     const defaultEntryCountPerPage: number = 10;
@@ -53,7 +53,7 @@ export default function Browse() {
         setError(false);
         setAsteroids(null);
         try {
-            const apiUri: string = `/api/get-asteroids?filter=${searchInput.input}`;
+            const apiUri: string = `/api/get-asteroids?input=${searchFilters.input}&orbit-class-type=${searchFilters.orbitClassType}`;
             const apiRes: Response = await fetch(apiUri, {
                 "method": "GET"
             });
@@ -80,8 +80,8 @@ export default function Browse() {
     }, []);
 
     const handlesearch = (event: FormEvent) => {
+        event.preventDefault();
         try {
-            event.preventDefault();
             getAsteroids();
         } catch (error: unknown) {
             if (error instanceof Error) {
@@ -124,17 +124,23 @@ export default function Browse() {
                                 {/* Search Form */}
                                 <form id={"form-search"} method={"POST"} onSubmit={(event) => handlesearch(event)}>
                                     <div id={"form-search-content"}>
+
+                                        {/* Search Input */}
                                         <input id={"form-search-input"} className={"input-text"} type={"text"} placeholder={BrowseConfig.en.search.placeholder}
-                                            onChange={(event) => setSearchInput({ input: event.target.value ? event.target.value.trim() : "" })} />
+                                            onChange={(event) => setSearchFilters({...searchFilters,  input: event.target.value ? event.target.value.trim() : "" })} />
+
+                                        {/* Orbit Class Types Dropdown */}
+                                        <OrbitClassTypeDropdown
+                                            orbitClassTypes={defaultOrbitClassTypes}
+                                            searchFilters={searchFilters}
+                                            setSearchFilters={setSearchFilters}
+                                        />
+
+                                        {/* Search Button */}
                                         <button id={"form-search-submit"} type={"submit"}>{BrowseConfig.en.search.button}</button>
+
                                     </div>
                                 </form>
-
-                                {/* Orbit Class Types Dropdown */}
-
-                                <OrbitClassTypeDropdown
-                                    orbitClassTypes={defaultOrbitClassTypes}
-                                />
 
                                 {asteroids && pagination ? (
                                     <>

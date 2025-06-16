@@ -238,7 +238,7 @@ button {
 
 #form-search-content {
   display: grid;
-  grid-template-columns: auto max-content;
+  grid-template-columns: auto auto max-content;
   align-items: center;
   gap: 10px;
   width: 100%;
@@ -482,7 +482,7 @@ button {
 .orbit-class-type-dropdown-header {
   background-color: var(--white);
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   padding: 20px;
 }
 
@@ -497,9 +497,9 @@ button {
 .orbit-class-type-dropdown-options {
   background-color: var(--white);
   border: none;
-  border-radius: 20px;
+  border-radius: 10px;
   position: absolute;
-  top: 80px;
+  top: 73px;
   left: 0;
   right: 0;
   z-index: 2;
@@ -516,8 +516,8 @@ button {
 .orbit-class-type-dropdown-option-first:hover {
   background-color: var(--navy);
   border: noner;
-  border-top-left-radius: 20px;
-  border-top-right-radius: 20px;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
   color: var(--white);
 }
 
@@ -529,7 +529,14 @@ button {
 .orbit-class-type-dropdown-option-last:hover {
   background-color: var(--navy);
   border: noner;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   color: var(--white);
+}
+
+/* Responsive design */
+@media only screen and (max-width: 950px) {
+  #form-search-content {
+    grid-template-columns: auto;
+  }
 }

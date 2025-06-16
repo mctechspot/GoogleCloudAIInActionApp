@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction } from "react";
+import { SearchFormType } from "@/types/form";
 import { ReportNotificationType } from "@/types/report";
 
 export type OrbitClassType = {
@@ -14,8 +15,9 @@ export type OrbitClassTypeWrapperType = {
 
 export type OrbitClassTypeDropdownType = {
     orbitClassTypes: OrbitClassType[];
+    searchFilters: SearchFormType;
+    setSearchFilters: Dispatch<SetStateAction<SearchFormType>>;
 }
-
 
 export type AsteroidType = {
     _id: string;
