@@ -11,7 +11,7 @@ export type OrbitClassType = {
 export type AsteroidType = {
     _id: string;
     name: string;
-    absolute_magnitude_h: number;
+    absolute_magnitude: number;
     estimated_diameter_min: number;
     estimated_diameter_max: number;
     is_potentially_hazardous: boolean;
@@ -27,7 +27,7 @@ export type AsteroidType = {
 export type AsteroidExtendedType = {
     _id: string;
     name: string;
-    absolute_magnitude_h: number;
+    absolute_magnitude: number;
     estimated_diameter_min: number;
     estimated_diameter_max: number;
     is_potentially_hazardous: boolean;

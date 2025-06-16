@@ -6,16 +6,31 @@
         "asteroid": {
             "_id": "ID",
             "name": "Name",
-            "absolute_magnitude_h": "Absolute Magnitude",
-            "estimated_diameter_min": "Estimated Minimum Diameter",
-            "estimated_diameter_max": "Estimated Maximum Diameter",
+            "absolute_magnitude": {
+                "title": "Absolute Magnitude",
+                "unit": "H"
+            },
+            "estimated_diameter_min": {
+                "title": "Estimated Minimum Diameter",
+                "unit": "km"
+            },
+            "estimated_diameter_max": {
+                "title": "Estimated Maximum Diameter",
+                "unit": "km"
+            },
             "is_potentially_hazardous": "Potentially Hazardous?",
             "orbit_id": "Orbit ID",
             "orbit_determination_date": "Orbit Determination Date",
             "first_observation_date": "First Observation Date",
             "last_observation_date": "Last Observation Date",
-            "semi_major_axis": "Semi Major Axis",
-            "inclination": "Inclination",
+            "semi_major_axis": {
+                "title": "Semi-Major Axis",
+                "unit": "AU"
+            },
+            "inclination": {
+                "title": "Inclination",
+                "unit": "º"
+            },
             "orbit_class_type": {
                 "title": "Orbit Class Type",
                 "details": {

@@ -131,30 +131,30 @@ export default function ListedAsteroid({ asteroid, reportNotification, setReport
                                 {/* Absolute Magnitude */}
                                 <div className={"listed-asteroid-details-section"}>
                                     <div className={"listed-asteroid-title font-weight-900"}>
-                                        {AsteroidConfig.en.details.absolute_magnitude_h}
+                                        {AsteroidConfig.en.details.absolute_magnitude.title}
                                     </div>
                                     <div className={"listed-asteroid-value"}>
-                                        {asteroid.absolute_magnitude_h}
+                                        {asteroid.absolute_magnitude}&nbsp;{AsteroidConfig.en.details.absolute_magnitude.unit}
                                     </div>
                                 </div>
 
                                 {/* Estimated Minimum Diameter */}
                                 <div className={"listed-asteroid-details-section"}>
                                     <div className={"listed-asteroid-title font-weight-900"}>
-                                        {AsteroidConfig.en.details.estimated_diameter_min}
+                                        {AsteroidConfig.en.details.estimated_diameter_min.title}
                                     </div>
                                     <div className={"listed-asteroid-value"}>
-                                        {asteroid.estimated_diameter_min}
+                                        {asteroid.estimated_diameter_min}&nbsp;{AsteroidConfig.en.details.estimated_diameter_min.unit}
                                     </div>
                                 </div>
 
                                 {/* Estimated Maximum Diameter */}
                                 <div className={"listed-asteroid-details-section"}>
                                     <div className={"listed-asteroid-title font-weight-900"}>
-                                        {AsteroidConfig.en.details.estimated_diameter_max}
+                                        {AsteroidConfig.en.details.estimated_diameter_max.title}
                                     </div>
                                     <div className={"listed-asteroid-value"}>
-                                        {asteroid.estimated_diameter_max}
+                                        {asteroid.estimated_diameter_max}&nbsp;{AsteroidConfig.en.details.estimated_diameter_max.unit}
                                     </div>
                                 </div>
 
@@ -211,20 +211,20 @@ export default function ListedAsteroid({ asteroid, reportNotification, setReport
                                 {/* Semi Major Axis */}
                                 <div className={"listed-asteroid-details-section"}>
                                     <div className={"listed-asteroid-title font-weight-900"}>
-                                        {AsteroidConfig.en.details.semi_major_axis}
+                                        {AsteroidConfig.en.details.semi_major_axis.title}
                                     </div>
                                     <div className={"listed-asteroid-value"}>
-                                        {asteroid.semi_major_axis}
+                                        {asteroid.semi_major_axis}&nbsp;{AsteroidConfig.en.details.semi_major_axis.unit}
                                     </div>
                                 </div>
 
                                 {/* Inclination */}
                                 <div className={"listed-asteroid-details-section"}>
                                     <div className={"listed-asteroid-title font-weight-900"}>
-                                        {AsteroidConfig.en.details.inclination}
+                                        {AsteroidConfig.en.details.inclination.title}
                                     </div>
                                     <div className={"listed-asteroid-value"}>
-                                        {asteroid.inclination}
+                                        {asteroid.inclination}&nbsp;{AsteroidConfig.en.details.inclination.unit}
                                     </div>
                                 </div>
 
