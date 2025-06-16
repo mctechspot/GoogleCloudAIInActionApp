@@ -1,5 +1,5 @@
 "use client"
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, RefObject, SetStateAction, useEffect, useRef, useState } from "react";
 import { OrbitClassType, OrbitClassTypeWrapperType, OrbitClassTypeDropdownType } from "@/types/asteroid"
 import ChevronDownIcon from "@/app/components/icons/ChevronDownIcon";
 import ChevronUpIcon from "@/app/components/icons/ChevronUpIcon";
@@ -8,10 +8,28 @@ export default function OrbitClassTypeDropdown({ orbitClassTypes }: OrbitClassTy
 
     const defaultHeaderText: string = "All Orbit Class Types";
     const [showOptions, setShowOptions]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
+    const dropdownRef: RefObject<HTMLDivElement | null> = useRef(null);
+
+    useEffect(() => {
+        document.addEventListener('click', handleOutsideClick);
+
+        return () => {
+            document.removeEventListener('click', handleOutsideClick);
+        };
+    }, [dropdownRef]);
+
+    // Toggle dropdown with outside click
+    const handleOutsideClick = (event: MouseEvent): void => {
+        const dropdownElement: HTMLDivElement | null = dropdownRef.current;
+        const path = event.composedPath();
+        if (dropdownElement && !path.includes(dropdownElement)) {
+            setShowOptions(false);
+        }
+    };
 
     return (
         <>
-            <div className={"orbit-class-type-dropdown-container"}>
+            <div className={"orbit-class-type-dropdown-container"} ref={dropdownRef}>
 
                 {/* Header */}
                 <div className={"orbit-class-type-dropdown-header"}>
@@ -34,8 +52,9 @@ export default function OrbitClassTypeDropdown({ orbitClassTypes }: OrbitClassTy
                                 />
                             )}
                         </button>
-
                     </div>
+
+
                 </div>
 
                 {/* Options */}
