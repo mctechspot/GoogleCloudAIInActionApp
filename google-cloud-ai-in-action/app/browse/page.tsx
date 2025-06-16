@@ -221,16 +221,7 @@ export default function Browse() {
 
                             </div>
                         </div>
-                    ) : (
-                        <>
-                            {/* Loader Here */}
-                            <div className={"loader-container"}>
-                                <div className={"loader"}></div>
-                            </div>
-
-                        </>
-                    )}
-
+                    ) : ("")}
 
                 </div>
 
