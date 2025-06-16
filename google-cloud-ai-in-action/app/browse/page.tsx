@@ -16,6 +16,7 @@ import OrbitClassTypeDropdown from "@/app/components/dropdowns/OrbitClassTypeDro
 export default function Browse() {
 
     const [searchFilters, setSearchFilters]: [SearchFormType, Dispatch<SetStateAction<SearchFormType>>] = useState<SearchFormType>({ input: "", orbitClassType: "" });
+    const [orbitClassTypes, setOrbitClassTypes]: [OrbitClassType[] | null, Dispatch<SetStateAction<OrbitClassType[] | null>>] = useState<OrbitClassType[] | null>(null);
     const [asteroids, setAsteroids]: [AsteroidExtendedType[] | null, Dispatch<SetStateAction<AsteroidExtendedType[] | null>>] = useState<AsteroidExtendedType[] | null>(null);
     const [error, setError]: [boolean, Dispatch<SetStateAction<boolean>>] = useState<boolean>(false);
     const defaultEntryCountPerPage: number = 10;
@@ -49,6 +50,27 @@ export default function Browse() {
         }
     ];
 
+    const getOrbitClassTypes = async (): Promise<void> => {
+        setError(false);
+        setAsteroids(null);
+        try {
+            const apiUri: string = `/api/get-orbit-class-types`;
+            const apiRes: Response = await fetch(apiUri, {
+                "method": "GET"
+            });
+            if (apiRes.status === 200) {
+                const orbitClassTypes: OrbitClassType[] = await apiRes.json();
+                setOrbitClassTypes(orbitClassTypes);
+            }
+        } catch (error: unknown) {
+            if (error instanceof Error) {
+                console.error(`Error getting orbit class types from server: ${error.message}`);
+            }
+            setError(true);
+            throw error;
+        }
+    }
+
     const getAsteroids = async (): Promise<void> => {
         setError(false);
         setAsteroids(null);
@@ -76,6 +98,7 @@ export default function Browse() {
     }
 
     useEffect(() => {
+        getOrbitClassTypes();
         getAsteroids();
     }, []);
 
@@ -108,95 +131,107 @@ export default function Browse() {
                         />
                     ) : ("")}
 
-                    <div className={""}>
-                        <div className={"main-padding grid-vertical-gap-20px"}>
-                            <p className={"heading-1 font-weight-900 text-center"}>{BrowseConfig.en.title}</p>
-                            <div className={"grid-vertical-gap-20px"}>
-                                {BrowseConfig.en.description.map((paragraph: string, index: number) => {
-                                    return (
-                                        <p key={`browse-description-paragraph-${index + 1}`}
-                                            className={"text-center"}>
-                                            {paragraph}
-                                        </p>
-                                    );
-                                })}
-
-                                {/* Search Form */}
-                                <form id={"form-search"} method={"POST"} onSubmit={(event) => handlesearch(event)}>
-                                    <div id={"form-search-content"}>
-
-                                        {/* Search Input */}
-                                        <input id={"form-search-input"} className={"input-text"} type={"text"} placeholder={BrowseConfig.en.search.placeholder}
-                                            onChange={(event) => setSearchFilters({...searchFilters,  input: event.target.value ? event.target.value.trim() : "" })} />
-
-                                        {/* Orbit Class Types Dropdown */}
-                                        <OrbitClassTypeDropdown
-                                            orbitClassTypes={defaultOrbitClassTypes}
-                                            searchFilters={searchFilters}
-                                            setSearchFilters={setSearchFilters}
-                                        />
-
-                                        {/* Search Button */}
-                                        <button id={"form-search-submit"} type={"submit"}>{BrowseConfig.en.search.button}</button>
-
-                                    </div>
-                                </form>
-
-                                {asteroids && pagination ? (
-                                    <>
-                                        {/* List asteroids */}
-                                        {asteroids.length > 0 ? (
-                                            <>
-                                                {/* Pagination */}
-                                                <Pagination
-                                                    pagination={pagination}
-                                                    setPagination={setPagination}
-                                                />
-                                                {asteroids.slice(pagination.currentPageIndex * pagination.entryCountPerPage, pagination.currentPageIndex * pagination.entryCountPerPage + pagination.entryCountPerPage).map((asteroid: AsteroidExtendedType) => {
-                                                    return (
-                                                        <ListedAsteroid key={`asteroid-${asteroid._id}`}
-                                                            asteroid={asteroid}
-                                                            reportNotification={reportNotification}
-                                                            setReportNotification={setReportNotification}
-                                                        />
-                                                    );
-                                                })}
-                                                {/* Pagination */}
-                                                <Pagination
-                                                    pagination={pagination}
-                                                    setPagination={setPagination}
-                                                />
-                                            </>
-
-                                        ) : (
-                                            <p className={"text-center"}>
-                                                No asteroids found based on your search filter. Adjust and try again.
+                    {orbitClassTypes ? (
+                        <div className={""}>
+                            <div className={"main-padding grid-vertical-gap-20px"}>
+                                <p className={"heading-1 font-weight-900 text-center"}>{BrowseConfig.en.title}</p>
+                                <div className={"grid-vertical-gap-20px"}>
+                                    {BrowseConfig.en.description.map((paragraph: string, index: number) => {
+                                        return (
+                                            <p key={`browse-description-paragraph-${index + 1}`}
+                                                className={"text-center"}>
+                                                {paragraph}
                                             </p>
-                                        )}
+                                        );
+                                    })}
 
-                                    </>
-                                ) : (
+                                    {/* Search Form */}
+                                    <form id={"form-search"} method={"POST"} onSubmit={(event) => handlesearch(event)}>
+                                        <div id={"form-search-content"}>
 
-                                    <>
-                                        {/* Loader Here */}
-                                        <div className={"loader-container"}>
-                                            <div className={"loader"}></div>
+                                            {/* Search Input */}
+                                            <input id={"form-search-input"} className={"input-text"} type={"text"} placeholder={BrowseConfig.en.search.placeholder}
+                                                onChange={(event) => setSearchFilters({ ...searchFilters, input: event.target.value ? event.target.value.trim() : "" })} />
+
+                                            {/* Orbit Class Types Dropdown */}
+                                            <OrbitClassTypeDropdown
+                                                orbitClassTypes={orbitClassTypes}
+                                                searchFilters={searchFilters}
+                                                setSearchFilters={setSearchFilters}
+                                            />
+
+                                            {/* Search Button */}
+                                            <button id={"form-search-submit"} type={"submit"}>{BrowseConfig.en.search.button}</button>
+
                                         </div>
+                                    </form>
 
-                                    </>
+                                    {asteroids && pagination ? (
+                                        <>
+                                            {/* List asteroids */}
+                                            {asteroids.length > 0 ? (
+                                                <>
+                                                    {/* Pagination */}
+                                                    <Pagination
+                                                        pagination={pagination}
+                                                        setPagination={setPagination}
+                                                    />
+                                                    {asteroids.slice(pagination.currentPageIndex * pagination.entryCountPerPage, pagination.currentPageIndex * pagination.entryCountPerPage + pagination.entryCountPerPage).map((asteroid: AsteroidExtendedType) => {
+                                                        return (
+                                                            <ListedAsteroid key={`asteroid-${asteroid._id}`}
+                                                                asteroid={asteroid}
+                                                                reportNotification={reportNotification}
+                                                                setReportNotification={setReportNotification}
+                                                            />
+                                                        );
+                                                    })}
+                                                    {/* Pagination */}
+                                                    <Pagination
+                                                        pagination={pagination}
+                                                        setPagination={setPagination}
+                                                    />
+                                                </>
 
-                                )}
+                                            ) : (
+                                                <p className={"text-center"}>
+                                                    No asteroids found based on your search filter. Adjust and try again.
+                                                </p>
+                                            )}
 
-                                {error ? (
-                                    <>
-                                        <p className={"text-center"}>An error has occured. Try again later.</p>
-                                    </>
-                                ) : ("")}
+                                        </>
+                                    ) : (
+
+                                        <>
+                                            {/* Loader Here */}
+                                            <div className={"loader-container"}>
+                                                <div className={"loader"}></div>
+                                            </div>
+
+                                        </>
+
+                                    )}
+
+                                    {error ? (
+                                        <>
+                                            <p className={"text-center"}>An error has occured. Try again later.</p>
+                                        </>
+                                    ) : ("")}
+
+                                </div>
 
                             </div>
-
                         </div>
-                    </div>
+                    ) : (
+                        <>
+                            {/* Loader Here */}
+                            <div className={"loader-container"}>
+                                <div className={"loader"}></div>
+                            </div>
+
+                        </>
+                    )}
+
+
                 </div>
 
                 <Footer />

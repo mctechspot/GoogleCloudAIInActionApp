@@ -32,11 +32,20 @@ export const getAsteroids = async (input: string = "", orbitClassType: string = 
 
         // Get orbit class types
         const orbitClassTypes: OrbitClassType[] = await getOrbitClassTypes();
-    
+
+        // Dynamically build query
+        const query: Record<string, unknown> = {};
+        if (input.trim()) {
+            query.name = { $regex: input.trim(), $options: "i" };
+        }
+        if (orbitClassType.trim()) {
+            query.orbit_class_type = orbitClassType.trim();
+        }
+
         // Fetch all asteroid data
         const db: Db = client.db('asteroids');
         const collection: Collection<AsteroidType> = db.collection('asteroids');
-        const asteroidsTemp: AsteroidType[] = await collection.find({name: {$regex: input.trim(), $options: "i"}, orbit_class_type : {$eq: orbitClassType.trim()}}).toArray();
+        const asteroidsTemp: AsteroidType[] = await collection.find(query).toArray();
         const asteroids: AsteroidExtendedType[] = asteroidsTemp.map((asteroid: AsteroidType) => {
             return {
                 ...asteroid,
