@@ -8,6 +8,15 @@ export type OrbitClassType = {
     description: string;
 }
 
+export type OrbitClassTypeWrapperType = {
+    orbitClassType: OrbitClassType;
+}
+
+export type OrbitClassTypeDropdownType = {
+    orbitClassTypes: OrbitClassType[];
+}
+
+
 export type AsteroidType = {
     _id: string;
     name: string;

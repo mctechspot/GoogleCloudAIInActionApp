@@ -4,13 +4,14 @@ import BrowseConfig from "@/app/config/browse.json";
 import Header from "@/app/components/navigation/Header";
 import Footer from "@/app/components/navigation/Footer";
 import { FormEvent } from "react";
-import { AsteroidExtendedType } from "@/types/asteroid";
+import { AsteroidExtendedType, OrbitClassType } from "@/types/asteroid";
 import ListedAsteroid from "@/app/components/asteroids/ListedAsteroid";
 import { PaginationType } from "@/types/pagination";
 import { ReportNotificationType } from "@/types/report";
 import Pagination from "@/app/components/asteroids/Pagination";
 import ReportNotification from "@/app/components/asteroids/ReportNotification";
 import { SearchFormType } from "@/types/form";
+import OrbitClassTypeDropdown from "@/app/components/dropdowns/OrbitClassTypeDropdown";
 
 export default function Browse() {
 
@@ -21,6 +22,32 @@ export default function Browse() {
     const defaultCurrentPageIndex: number = 0;
     const [pagination, setPagination]: [PaginationType | null, Dispatch<SetStateAction<PaginationType | null>>] = useState<PaginationType | null>(null);
     const [reportNotification, setReportNotification]: [ReportNotificationType | null, Dispatch<SetStateAction<ReportNotificationType | null>>] = useState<ReportNotificationType | null>(null);
+    const defaultOrbitClassTypes: OrbitClassType[] = [
+        {
+            _id: '5fded3d8-61e0-407a-8e0c-d834c5fac6b8',
+            abbreviation: 'ATE',
+            name: 'Aten-class Asteroid',
+            description: "These asteroids have orbits that cross the Earth's orbit and have a semi-major axis less than 1 AU."
+        },
+        {
+            _id: '3eecf3b1-3e6c-4da7-937d-8bde7c6dc8c3',
+            abbreviation: 'APO',
+            name: 'Appollo-class Asteroid',
+            description: "These asteroids have orbits that cross the Earth's orbit and have a semi-major axis greater than 1 AU."
+        },
+        {
+            _id: '1a71ed5c-1f31-45a1-8e3e-98c91fa640dd',
+            abbreviation: 'IEO',
+            name: 'Inner Earth Object (Atiras)',
+            description: "These asteroids have orbits that fall strictly within the Earth's orbit."
+        },
+        {
+            _id: '12b41059-abe0-4b94-b67b-24c34f6b2869',
+            abbreviation: 'AMO',
+            name: 'Amor-class Asteroid',
+            description: "These asteroids have orbits that fall strictly outside the Earth's orbit."
+        }
+    ];
 
     const getAsteroids = async (): Promise<void> => {
         setError(false);
@@ -102,6 +129,12 @@ export default function Browse() {
                                         <button id={"form-search-submit"} type={"submit"}>{BrowseConfig.en.search.button}</button>
                                     </div>
                                 </form>
+
+                                {/* Orbit Class Types Dropdown */}
+
+                                <OrbitClassTypeDropdown
+                                    orbitClassTypes={defaultOrbitClassTypes}
+                                />
 
                                 {asteroids && pagination ? (
                                     <>
