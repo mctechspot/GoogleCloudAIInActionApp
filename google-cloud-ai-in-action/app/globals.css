@@ -165,6 +165,37 @@ button {
   gap: 20px;
 }
 
+.header-content-nav-condensed {
+  display: none;
+}
+
+.header-content-nav-condensed-content{
+  background-color: var(--navy);
+  border-left: solid 2px var(--navy-medium);
+  height: 100vh;
+  width: calc(100vw * 0.33);
+  position: fixed;
+  top: 0;
+  right: 0;
+  padding: 20px;
+}
+
+.header-content-nav-condensed-close-button{
+  display: flex;
+  align-self: center;
+  justify-self: end;
+}
+
+.header-content-nav-condensed-content-nav{
+  display: grid;
+  grid-template-columns: auto;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  padding-top: 20px;
+}
+
 .header-logo-container {
   display: flex;
   align-items: center;
@@ -535,6 +566,25 @@ button {
 }
 
 /* Responsive design */
+@media only screen and (max-width: 700px) {
+
+  .main-padding{
+    padding: 50px;
+  }
+
+  .header-content{
+    padding: 20px 50px;
+  }
+
+  .header-content-nav {
+    display: none;
+  }
+
+  .header-content-nav-condensed {
+    display: block;
+  }
+}
+
 @media only screen and (max-width: 950px) {
   #form-search-content {
     grid-template-columns: auto;

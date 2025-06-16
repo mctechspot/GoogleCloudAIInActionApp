@@ -11,7 +11,7 @@ export const getOrbitClassTypes = async (): Promise<OrbitClassType[]> => {
         // Fetch all orbit class types data
         const db: Db = client.db('asteroids');
         const collection: Collection<OrbitClassType> = db.collection('orbit_class_types');
-        const orbitClassTypes: OrbitClassType[] = await collection.find({}).toArray();
+        const orbitClassTypes: OrbitClassType[] = await collection.find({}).sort({name: 1}).toArray();
         return orbitClassTypes;
     } catch (error: unknown) {
         if (error instanceof Error) {
@@ -45,7 +45,7 @@ export const getAsteroids = async (input: string = "", orbitClassType: string = 
         // Fetch all asteroid data
         const db: Db = client.db('asteroids');
         const collection: Collection<AsteroidType> = db.collection('asteroids');
-        const asteroidsTemp: AsteroidType[] = await collection.find(query).toArray();
+        const asteroidsTemp: AsteroidType[] = await collection.find(query).sort({ name: 1 }).toArray();
         const asteroids: AsteroidExtendedType[] = asteroidsTemp.map((asteroid: AsteroidType) => {
             return {
                 ...asteroid,
