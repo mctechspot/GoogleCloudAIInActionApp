@@ -5,6 +5,8 @@ Asteroid Collection is an educational platform that strives to educate the publi
 
 The application is powered by Next.js, using HTML, CSS and TypeScript on the frontend with a Node.js backend. The backend uses the Node.js MongoDB driver to connect to a MonogoDB NoSQL asteroid database to fetch and display detailed information about thousands of known asteroids.
 
+![Google Cloud AI in Action Architecture](./assets/google-cloud-ai-in-action-architecture.png)
+
 ## Local Environment Setup
 
 You need to set up the environment on your local device to work with the requisite tools and libraries so that the application can run.
