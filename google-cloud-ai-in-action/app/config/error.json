@@ -1,0 +1,18 @@
+{
+    "en": {
+        "error_404":{
+            "message": "404 Error - Page Not Found",
+            "direct": {
+                "link": "/browse",
+                "text": "Go to Asteroid Catalogue"
+            }
+        },
+        "error_500":{
+            "message": "500 Error - Server Error",
+            "direct": {
+                "link": "/browse",
+                "text": "Go to Asteroid Catalogue"
+            }
+        }
+    }
+}
