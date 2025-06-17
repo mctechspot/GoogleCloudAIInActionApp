@@ -49,6 +49,8 @@ Furthermore, for a live deployments of the application, which is discussed later
 - Artifact Registry Create-on-Push Writer
 - Logs Writer
 - Logs Viewer
+- Service Account User
+- Cloud Run Admin
 
 ## .env File Check
 Ensure that your .env file looks something like this with the correct values pasted.
