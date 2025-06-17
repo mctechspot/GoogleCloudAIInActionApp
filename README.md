@@ -13,7 +13,7 @@ You need to set up the environment on your local device to work with the requisi
 
 Ensure that [git](https://git-scm.com/downloads) is installed on your device.
 
-Ensure that [node](https://nodejs.org/en/download) version 18 or above (preferably at least version 20) is installed on your device.
+Ensure that [Node.js](https://nodejs.org/en/download) version 18 or above (preferably at least version 20) is installed on your device. Node.js bundles npm (node package manager), and so downloading the former should also download the latter. You will later need npm to run the application locally.
 
 Enter a secure directory on your device.
 ```
@@ -55,11 +55,11 @@ Furthermore, for a live deployments of the application, which is discussed later
 - Cloud Run Admin
 
 ## .env File Check
-Ensure that your .env file looks something like this with the correct values pasted.
+Ensure that your .env file looks something like this with the correct values pasted. Remember that for running the application locally you may use the connection string of the MongoDB container on your device, but for the deployment of the live application, you will need the connection string of the live database provided to you by MongoDB Atlas.
 ```
 GEMINI_API_KEY=<INSERT_REAL_API_KEY_HERE>
 GEMINI_MODEL=<INSERT_NAME_OF_MODEL_CHOICE_HERE>
-MONGO_DB_CONNECTION_URI=<INSERT_REAL_MONGODB_URI_CONNECTION_STRING_HERE>
+MONGO_DB_CONNECTION_URI=<INSERT_MONGODB_URI_CONNECTION_STRING_HERE>
 ```
 
 ## Run the Application Locally with NPM (Node Package Manager)
@@ -81,7 +81,7 @@ Open the application in a browser at the address ``http://127.0.0.1:3000``, spec
 
 ## Run the Application Locally with Docker
 
-Alternatively, you may choose to run the application locally with Docker instead of NPM.
+Alternatively, you may choose to run the application locally with Docker instead of npm.
 
 Ensure that [Docker](https://docs.docker.com/engine/install/) is installed on your local device
 
@@ -110,13 +110,13 @@ You should already have a Google Cloud Account with billing enabled and linked t
 Direct to Google Cloud Run and choose the option **Choose repo** in order to link a new Cloud Run service to this cloned GitHub repository. You will be prompted to grant Google Cloud access to the GitHub repository. Proceed to grant acess.
 
 You will need to trigger deployments for tagged releases of this repository from the main branch. Specify the trigger event to be **Push new tag** with source 
-**Cloud Build repositories** and with repository generation set to **1st gen**. Set the repository to this **GoogleCloudAIInActionApp** with the tag pattern should be specified as **v\*.\*.\*** For configuration, choose type **Dockerfile** and location **Repository**. The dockerfile directory should be the application root directory which would be **google-cloud-ai-in-action**. Leave the dockerfile name as **Dockerfile**. Choose the service account that you previously created with the appropriate mentioned roles. 
+**Cloud Build repositories** and with repository generation set to **1st gen**. Set the repository to this **GoogleCloudAIInActionApp** with the tag pattern specified as **v\*.\*.\*** For configuration, choose type **Dockerfile** and location **Repository**. The dockerfile directory should be the application root directory which would be **google-cloud-ai-in-action**. Leave the dockerfile name as **Dockerfile**. Choose the service account that you previously created with the appropriate mentioned roles. 
 
 In the settings section, go to resources where you should set the memory to at least **1 GiB** and the number of CPUs to at least **1 CPU**. Go to the tab called Variables & Secrets to add the three aforementioned environment variables. Remember to use the live MongoDB URI connection string and not the URI connection string of the MongoDB Docker container running on your local device.
 ```
 GEMINI_API_KEY=<INSERT_REAL_API_KEY_HERE>
 GEMINI_MODEL=<INSERT_NAME_OF_MODEL_CHOICE_HERE>
-MONGO_DB_CONNECTION_URI=<INSERT_REAL_MONGODB_URI_CONNECTION_STRING_HERE>
+MONGO_DB_CONNECTION_URI=<INSERT_LIVE_MONGODB_URI_CONNECTION_STRING_HERE>
 ```
 
 Ensure that the service allows unauthenticated HTTP requests so that it is publically available across the internet.
@@ -127,4 +127,8 @@ Direct back to Google Cloud Run to see the deployment status. Logs should be ava
 
 Congratulations! You have deployed a full-stack application that is connected to a MongoDB database and that uses Google Gemini to integrate Generative Artificial Intelligence.
 
-You may view a live version of the application [here](https://google-cloud-ai-in-action-app-413579270418.europe-west1.run.app/)!
+## Demo and Live Application
+
+You may view a video demo of the application [here](https://www.youtube.com/watch?v=capBNrbYT7E).
+
+Additionally, you may view a live version of the application [here](https://google-cloud-ai-in-action-app-413579270418.europe-west1.run.app/).
