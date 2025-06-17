@@ -102,6 +102,145 @@ docker run -d -p 3000:3000 --name google-cloud-ai-in-action google-cloud-ai-in-a
 
 You should be able to access the port in a browser at the address ``http://127.0.0.1:3000``
 
+## Relevant API Endpoints
+
+The directory **google-cloud-ai-in-action/api** contains the relevant API REST endpoints used in this application.
+
+
+**/api/get-orbit-class-types**
+
+Purpose: Fetch orbit class types which are needed for the user to filter asteroids
+
+Method: GET
+
+Response Body: list orbit class types
+
+```
+curl -X GET 127.0.0.1:3000/api/get-orbit-class-types
+
+# Returns this response
+[
+    {
+        "_id": "12b41059-abe0-4b94-b67b-24c34f6b2869",
+        "abbreviation": "AMO",
+        "name": "Amor-class Asteroid",
+        "description": "These asteroids have orbits that fall strictly outside the Earth's orbit."
+    },
+    {
+        "_id": "3eecf3b1-3e6c-4da7-937d-8bde7c6dc8c3",
+        "abbreviation": "APO",
+        "name": "Apollo-class Asteroid",
+        "description": "These asteroids have orbits that cross the Earth's orbit and have a semi-major axis greater than 1 AU."
+    },
+    {
+        "_id": "5fded3d8-61e0-407a-8e0c-d834c5fac6b8",
+        "abbreviation": "ATE",
+        "name": "Aten-class Asteroid",
+        "description": "These asteroids have orbits that cross the Earth's orbit and have a semi-major axis less than 1 AU."
+    },
+    {
+        "_id": "1a71ed5c-1f31-45a1-8e3e-98c91fa640dd",
+        "abbreviation": "IEO",
+        "name": "Inner Earth Object (Atiras)",
+        "description": "These asteroids have orbits that fall strictly within the Earth's orbit."
+    }
+]
+```
+
+**/api/get-asteroids**
+
+Purpose: Fetch asteroids according to filters specified by users
+
+Method: GET
+
+Paremters:
+- input: string value to filter asteroids by name or number
+- orbit-class-type: string value for the _id of the orbit class type
+
+Response Body: list of asteroids that meet filter criteria, e.g.
+
+```
+curl -X GET 127.0.0.1:3000/api/get-asteroids?input=eros&orbit-class-type=12b41059-abe0-4b94-b67b-24c34f6b2869
+
+# Returns this response
+[
+    {
+        "_id": "2001943",
+        "name": "1943 Anteros (1973 EC)",
+        "absolute_magnitude": "15.69",
+        "estimated_diameter_min": "1.9344387205",
+        "estimated_diameter_max": "4.3255364773",
+        "is_potentially_hazardous": "False",
+        "orbit_id": "776",
+        "orbit_determination_date": "2024-12-22 05:25:41",
+        "first_observation_date": "1973-03-10 00:00:00",
+        "last_observation_date": "2024-04-10 00:00:00",
+        "semi_major_axis": "1.43032986682301",
+        "inclination": "8.708729946912538",
+        "orbit_class_type": {
+            "_id": "12b41059-abe0-4b94-b67b-24c34f6b2869",
+            "abbreviation": "AMO",
+            "name": "Amor-class Asteroid",
+            "description": "These asteroids have orbits that fall strictly outside the Earth's orbit."
+        }
+    },
+    {
+        "_id": "2000433",
+        "name": "433 Eros (A898 PA)",
+        "absolute_magnitude": "10.41",
+        "estimated_diameter_min": "22.0067027115",
+        "estimated_diameter_max": "49.2084832235",
+        "is_potentially_hazardous": "False",
+        "orbit_id": "659",
+        "orbit_determination_date": "2021-05-24 17:55:05",
+        "first_observation_date": "1893-10-29 00:00:00",
+        "last_observation_date": "2021-05-13 00:00:00",
+        "semi_major_axis": "1.45815896084448",
+        "inclination": "10.82830761253864",
+        "orbit_class_type": {
+            "_id": "12b41059-abe0-4b94-b67b-24c34f6b2869",
+            "abbreviation": "AMO",
+            "name": "Amor-class Asteroid",
+            "description": "These asteroids have orbits that fall strictly outside the Earth's orbit."
+        }
+    }
+]
+```
+
+**/api/generate-asteroid-report**
+
+Purpose: Generate a PDF report for an asteroid chosen by the user
+
+Method: POST
+
+Payload: an asteroid body
+```
+{
+    "_id": "3012393",
+    "name": "(1979 XB)",
+    "absolute_magnitude": "18.6",
+    "estimated_diameter_min": "0.5064714588",
+    "estimated_diameter_max": "1.1325046106",
+    "is_potentially_hazardous": "True",
+    "orbit_id": "13",
+    "orbit_determination_date": "2021-04-14 20:44:29",
+    "first_observation_date": "1979-12-11 00:00:00",
+    "last_observation_date": "1979-12-15 00:00:00",
+    "semi_major_axis": "2.228085656329666",
+    "inclination": "24.73412122397795",
+    "orbit_class_type": {
+        "_id": "3eecf3b1-3e6c-4da7-937d-8bde7c6dc8c3",
+        "abbreviation": "APO",
+        "name": "Apollo-class Asteroid",
+        "description": "These asteroids have orbits that cross the Earth's orbit and have a semi-major axis greater than 1 AU."
+    }
+}
+```
+
+Response Body: PDF document with the generated report. Below you may view an example of the cover page of a generated PDF report.
+
+![Google Cloud AI in Action Architecture](./assets/cover-page-generated-report.png)
+
 ## Deploy Application with Google Cloud Run
 Google Cloud allows easy deployment of containerised applications with the [Google Cloud Run Service](https://cloud.google.com/run).
 
