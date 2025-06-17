@@ -1,11 +1,11 @@
 # Google Cloud AI In Action App
-This repository hosts the full-stack application for an asteroid collection project. The application is part of the submission to the Google Cloud AI in Action Hackathon of June 2025.
+This repository hosts the full-stack application for an asteroid collection project. The application was developed as part of a submission to the MongoDB Challenge of the Google Cloud AI in Action Hackathon of June 2025.
 
-Asteroid Collection is an educational platform that strives to educate the public on the asteroids in our universe. Users may browse a rich catalogue of asteroid data and generate reports on asteroids of their choosing.
+Asteroid Collection is an educational platform that strives to educate the public on the asteroids in our universe. Users may browse a rich catalogue of asteroid data and generate PDF reports on asteroids of their choosing.
 
 The application is powered by Next.js, using HTML, CSS and TypeScript on the frontend with a Node.js backend. The backend uses the Node.js MongoDB driver to connect to a MonogoDB NoSQL asteroid database to fetch and display detailed information about thousands of known asteroids.
 
-![Google Cloud AI in Action Architecture](./assets/google-cloud-ai-in-action-architecture.png)
+![Google Cloud AI in Action Architecture](./assets/google-cloud-ai-in-action-architecture.svg)
 
 ## Local Environment Setup
 
