@@ -121,6 +121,6 @@ Now anytime you need to deploy an updated version of the application, you only n
 
 Direct back to Google Cloud Run to see the deployment status. Logs should be available during each stage of the deployment process. In the case of success, the traffic for the application should be directed to the most recent deployment, although you may choose to split the traffic between services. A URL will automatically be generated for you to access the live application. In case of failure, check the logs to see what needs to be corrected. 
 
-Congratulations! You have deployed a live full-stack application that is connected to a MongoDB database and that uses Google Gemini to integrate Generative Artificial Intelligence.
+Congratulations! You have deployed a full-stack application that is connected to a MongoDB database and that uses Google Gemini to integrate Generative Artificial Intelligence.
 
 You may view a live version of the application [here](https://google-cloud-ai-in-action-app-413579270418.europe-west1.run.app/)!
