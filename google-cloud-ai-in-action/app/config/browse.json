@@ -5,7 +5,7 @@
             "Here you may browse our asteroid collection to garner insights and generate detailed astronomical reports."
         ],
         "search": {
-            "placeholder": "Search for an asteroid by name or number. e.g. 433 or Eros",
+            "placeholder": "Search for an asteroid by name or number, e.g., Eros or 433.",
             "button": "Search"
         }
     }
