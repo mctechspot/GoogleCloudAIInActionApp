@@ -27,7 +27,7 @@ git clone https://github.com/mctechspot/GoogleCloudAIInActionApp
 
 Enter the repository cloned to your local device.
 ```
-cd <path-to-secure-directory>/GoogleCloudAIInActionFrontend
+cd <path-to-secure-directory>/GoogleCloudAIInActionApp
 ```
 
 Enter the Next.js application directory
@@ -87,7 +87,7 @@ Ensure that [Docker](https://docs.docker.com/engine/install/) is installed on yo
 
 First ensure that you are inside the root of the application.
 ```
-cd <path-to-secure-directory>/GoogleCloudAIInActionFrontend/google-cloud-ai-in-action
+cd <path-to-secure-directory>/GoogleCloudAIInActionApp/google-cloud-ai-in-action
 ```
 
 Build the Docker image.
