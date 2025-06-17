@@ -1,11 +1,15 @@
-# GoogleCloudAIInActionFrontend
-Google Cloud AI In Action Frontend
+# Google CloudAI In Action Frontend
+This repository hosts the full-stack application for an asteroid collection project. The application is part of the submission to the Google Cloud AI in Action Hackathon of June 2025.
+
+Asteroid Collection is an educational platform that strives to educate the public on the asteroids in our universe. The application is powered by Next.js, using HTML, CSS and TypeScript on the frontend with a Node.js backend. The backend uses the Node.js MongoDB driver to connect to a MonogoDB NoSQL asteroid database to fetch and display detailed information about thousands of known asteroids.
 
 ## Local Environment Setup
 
-Ensure [git](https://git-scm.com/downloads) is installed on your device.
+You need to set up the environment on your local device to work with the requisite tools and libraries so that the application can run.
 
-Ensure [node](https://nodejs.org/en/download) version 18 or above (preferably at least version 20) is installed on your device.
+Ensure that [git](https://git-scm.com/downloads) is installed on your device.
+
+Ensure that [node](https://nodejs.org/en/download) version 18 or above (preferably at least version 20) is installed on your device.
 
 Enter a secure directory on your device
 ```
@@ -27,6 +31,29 @@ Enter the Next.js application directory
 cd google-cloud-ai-in-action
 ```
 
+Before you run the application, you need to configure some external services such as the database and cloud dependencies.
+
+## Database Setup
+The data preparation for this application can be understood with the help of a separate codebase. Direct to this [GoogleCloudAIInActionData repository](https://github.com/mctechspot/GoogleCloudAIInActionData) with detailed instructions on how to prepare the data, create a local MongoDB container as well as a live MongoDB database running in [MongoDB Atlas](https://www.mongodb.com/docs/atlas/getting-started/). You may import the data into both your local and live instances of MongoDB so that the application may correctly fetch the data. Just rememeber that you will need to add a variable called **MONGO_DB_CONNECTION_URI** to the .env file. For local execution of the application, you will need to paste the correct URI for the local MongoDB instance. For live deployments of the application, you will need to specify the URI that MongoDB atlas has provided. Remember that this [GoogleCloudAIInActionData repository](https://github.com/mctechspot/GoogleCloudAIInActionData) repository guides you through this process in detail.
+
+## Google Cloud Setup
+As this project uses Google Gemini LLMs to generate the asteroid reports, you will need to get an API key to access a model. 
+
+You need to create an account in [Google Cloud](https://console.cloud.google.com/). Create a google project in this account. You may name the project **google-cloud-ai-in-action**. New accounts typically grant free credits to use some services. However, in the case of LLMs, it is very likely that you will charged to use their APIs and will be prompted to add a billing account. Proceed to create a billing account and link it your project when prompted.
+
+Create a [Gemini API key](https://ai.google.dev/gemini-api/docs/api-key). In the root of the repository, create a .env file and add a variable called **GEMINI_API_KEY** with the value of this API key you have generated. You also need to add a varible called **GEMINI_MODEL** where you will paste the value **gemini-2.0-flash**. This model is the default model used for this application but feel free to play around with any Gemini model that interest you.
+
+## .env File Check
+Ensure that your .env file looks something like this with the correct values pasted.
+```
+GEMINI_API_KEY=<INSERT_REAL_API_KEY_HERE>
+GEMINI_MODEL=<INSERT_NAME_OF_MODEL_CHOICE_HERE>
+MONGO_DB_CONNECTION_URI=<INSERT_REAL_MONGODB_URI_CONNECTION_STRING_HERE>
+```
+
+## Run the Application Locally with NPM (Node Package Manager)
+Now that the environment and external dependencies have been configured, you may run the application locally.
+
 Install the requisite dependencies.
 ```
 npm install
@@ -36,3 +63,45 @@ Run the application.
 ```
 npm run dev
 ```
+
+The application should default to port 3000, but if that port is occupied by another service on your device it will default to 3001. If port 3001 is busy, it will default to port 3002, following that pattern until it finds a free port.
+
+Open the application in a browser at the address ``http://127.0.0.1:3000``, specifying whichever port the application is running on.
+
+## Run the Application Locally with Docker
+
+Alternatively, you may choose to run the application locally with Docker instead of NPM.
+
+Ensure that [Docker](https://docs.docker.com/engine/install/) is installed on your local device
+
+First ensure that you are inside the root of the application.
+```
+cd <path-to-secure-directory>/GoogleCloudAIInActionFrontend/google-cloud-ai-in-action
+```
+
+Build the Docker image.
+```
+docker build --no-cache -t google-cloud-ai-in-action:latest .
+```
+
+Run the Docker container at a free local port. You will need to specify the -p flag with <host_port>:<docker_internal_service_port>. The <docker_internal_service_port> should remain as 3000 with you changing the <host_port> to any free port on your local device.
+```
+docker run -d -p 3000:3000 --name google-cloud-ai-in-action google-cloud-ai-in-action:latest
+```
+
+You should be able to access the port in a browser at the address ``http://127.0.0.1:3000``
+
+## Deploy Application to Google Cloud
+Google Cloud allows easy deployment of containerised applications with the [Google Cloud Run Service](https://cloud.google.com/run).
+
+You should already have a Google Cloud Account with billing enabled and linked to your project. 
+
+Direct to Google Cloud Run and choose the option **Choose repo** in order to link a new Cloud Run service to this cloned GitHub repository. You will be prompted to grant Google Cloud access to the GitHub repository. Proceed to grant acess.
+
+You will need to trigger deployments for tagged releases of this repository from the main branch. Specify your trigger to be **push to new tag** on **main** branch. The tag pattern should be specified as **v*.*.*** Choose the **Dockerfile** option as the build choice and specify the path in the repository to the Dockerfile. In this case it is the application root directory which would be **google-cloud-ai-in-action**. Ensure that the service allows unauthenticated HTTP requests so that it is publically available across the internet. 
+
+Now anytime you need to deploy an updated version of the application, you only need to direct to the GitHub repository and create a new release with an accompanying tag from the main branch. A tag must follow the aforementioned format such as **v1.0.0**
+
+Direct back to Google Cloud Run to see the deployment status. Logs should be availabl e during each stage of the deployment process. In the case of success, the traffic for the application should be directed to the most recent deployment, although you may choose to split the traffic between services. A URL will automatically be generated for you to access the live application. In case of failure, check the logs to see what needs to be corrected. 
+
+Congratulations! You have deployed a live full-stack application that is connected to a MongoDB database and that uses Google Gemini to integrate Generative Artificial Intelligence.
